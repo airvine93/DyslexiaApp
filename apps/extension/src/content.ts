@@ -1,5 +1,5 @@
 // Runs on every web page: restyles the page's own text, so it also works on sites you are signed in to.
-import { applyBionic, applyBionicToNew, clearBionic, cssVars, fontClasses, fontFaces, pageCss, tintColour, tintVisible, WRAP, type Settings } from '@dr/core';
+import { applyBionic, applyBionicToNew, boldPercent, clearBionic, cssVars, fontClasses, fontFaces, pageCss, tintColour, tintVisible, WRAP, type Settings } from '@dr/core';
 import { load, type State } from './store';
 
 const html = document.documentElement;
@@ -54,8 +54,8 @@ function apply(state: State): void {
   html.classList.toggle('dr-spacing', !!s && s.letterSpacing > 0);
   if (s) for (const [k, v] of Object.entries(cssVars(s))) html.style.setProperty(k, v);
   setTint(s);
-  const percent = s?.bionic ?? 0;
-  if (percent !== (current?.bionic ?? 0) || !current !== !s) {
+  const percent = s ? boldPercent(s) : 0;
+  if (percent !== (current ? boldPercent(current) : 0) || !current !== !s) {
     observer?.disconnect();
     if (percent > 0) applyBionic(document.body, percent); else clearBionic(document.body);
     watch(percent);

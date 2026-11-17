@@ -28,7 +28,7 @@ html.dr-thin-bold b.dr-b{-webkit-text-stroke:0.035em currentColor}
 
 /** Values for the CSS variables used by `pageCss`. */
 export function cssVars(s: Settings): Record<string, string> {
-  const font = fontById(s.font);
+  const font = s.fontOn ? fontById(s.font) : undefined;
   return {
     '--dr-ls': `${s.letterSpacing / 100}em`,
     '--dr-ws': `${0.1 + s.letterSpacing / 50}em`,
@@ -38,6 +38,6 @@ export function cssVars(s: Settings): Record<string, string> {
 
 /** Classes for <html>: `dr-font` while a reading font is chosen, `dr-thin-bold` when its bold needs the extra outline. */
 export function fontClasses(s: Settings): { 'dr-font': boolean; 'dr-thin-bold': boolean } {
-  const font = fontById(s.font);
+  const font = s.fontOn ? fontById(s.font) : undefined;
   return { 'dr-font': !!font, 'dr-thin-bold': !!font?.thinBold };
 }

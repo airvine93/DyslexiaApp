@@ -17,6 +17,19 @@
       <button id="edit" type="button">Type</button>
       <button id="toggle-panel" type="button" aria-expanded="false" aria-controls="panel">Settings</button>
     </div>
+    <div class="quick" role="toolbar" aria-label="Quick reading controls">
+      <div class="group">
+        <button id="q-font-on" type="button" class="toggle" aria-pressed="true">Font</button>
+        <select id="q-font" aria-label="Reading font"></select>
+      </div>
+      <div class="group">
+        <button id="q-bold-on" type="button" class="toggle" aria-pressed="true">Bold</button>
+        <button id="q-less" type="button" class="step" aria-label="Less bold" title="Less bold">−</button>
+        <input id="q-bold" type="range" min="5" max="80" step="1" aria-label="How much of each word is bold" />
+        <button id="q-more" type="button" class="step" aria-label="More bold" title="More bold">+</button>
+        <output id="q-bold-out" for="q-bold"></output>
+      </div>
+    </div>
   </header>
 
   <main id="main">
@@ -32,13 +45,13 @@
     <div class="panel-head"><h2>Reading settings</h2><button id="close-panel" type="button" aria-label="Close settings">Done</button></div>
 
     <section>
-      <h3 id="font-heading">Font</h3>
+      <label class="switch"><input id="font-on" type="checkbox" /> <span id="font-heading">Use a reading font</span></label>
       <div class="fonts" id="fonts" role="radiogroup" aria-labelledby="font-heading"></div>
     </section>
 
     <section>
-      <div class="label-row"><label for="bionic">Bold the start of words</label><output id="bionic-out"></output></div>
-      <input id="bionic" type="range" min="0" max="80" step="1" list="bionic-marks" />
+      <div class="label-row"><label class="switch"><input id="bionic-on" type="checkbox" /> <span>Bold the start of words</span></label><output id="bionic-out"></output></div>
+      <input id="bionic" type="range" min="5" max="80" step="1" list="bionic-marks" aria-label="How much of each word is bold" />
       <datalist id="bionic-marks"></datalist>
       <div class="marks" id="bionic-mark-labels"></div>
     </section>

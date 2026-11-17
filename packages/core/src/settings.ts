@@ -1,8 +1,12 @@
 /** Everything the person can change. The same shape is used by the reader app, the screen tint and the browser extension. */
 export interface Settings {
-  /** Which reading font to show text in (an id from FONTS), or "off" to keep the text's own font. */
+  /** Whether to show text in a reading font. Off keeps the text's own font, and remembers the choice below. */
+  fontOn: boolean;
+  /** Which reading font to use (an id from FONTS). */
   font: string;
-  /** Bold-front strength: the share of each word, in percent, that is made bold. 0 is off. */
+  /** Whether to make the start of each word bold. Off remembers the strength below. */
+  bionicOn: boolean;
+  /** Bold-front strength: the share of each word, in percent, that is made bold. */
   bionic: number;
   /** Colour tint laid over what you are reading. */
   tint: { on: boolean; colour: string; strength: number };
@@ -16,11 +20,16 @@ export interface Settings {
 
 import { FONT_OFF, fontById } from './fonts';
 
+export const BIONIC_MIN = 5;
 export const BIONIC_MAX = 80;
+/** How much one press of "More bold" or "Less bold" changes the strength. */
+export const BIONIC_STEP = 5;
 export const TINT_MAX = 70;
 
 export const DEFAULTS: Settings = {
+  fontOn: true,
   font: 'opendyslexic',
+  bionicOn: true,
   bionic: 40,
   tint: { on: false, colour: '#fff3b0', strength: 30 },
   size: 20,
@@ -30,7 +39,6 @@ export const DEFAULTS: Settings = {
 
 /** Named points on the bold-front slider. Light, Medium and Strong match the Emotion Shaper app's steps. */
 export const BIONIC_MARKS = [
-  { value: 0, label: 'Off' },
   { value: 30, label: 'Light' },
   { value: 45, label: 'Medium' },
   { value: 60, label: 'Strong' },
@@ -58,8 +66,11 @@ export function normalise(raw: unknown): Settings {
   const t = (r.tint && typeof r.tint === 'object' ? r.tint : {}) as Record<string, unknown>;
   const colour = typeof t.colour === 'string' && /^#[0-9a-f]{6}$/i.test(t.colour) ? t.colour.toLowerCase() : DEFAULTS.tint.colour;
   return {
-    font: normaliseFont(r.font),
-    bionic: clamp(r.bionic, 0, BIONIC_MAX, DEFAULTS.bionic),
+    // Older settings stored the font as true/false or "off", and bold strength 0 meant off
+    fontOn: typeof r.fontOn === 'boolean' ? r.fontOn : !(r.font === false || r.font === FONT_OFF),
+    font: typeof r.font === 'string' && fontById(r.font) ? r.font : DEFAULTS.font,
+    bionicOn: typeof r.bionicOn === 'boolean' ? r.bionicOn : r.bionic !== 0,
+    bionic: r.bionic === 0 ? DEFAULTS.bionic : clamp(r.bionic, BIONIC_MIN, BIONIC_MAX, DEFAULTS.bionic),
     tint: {
       on: typeof t.on === 'boolean' ? t.on : DEFAULTS.tint.on,
       colour,
@@ -71,12 +82,15 @@ export function normalise(raw: unknown): Settings {
   };
 }
 
-/** Older settings stored the font as on/off, meaning OpenDyslexic. */
-function normaliseFont(v: unknown): string {
-  if (v === true) return 'opendyslexic';
-  if (v === false || v === FONT_OFF) return FONT_OFF;
-  return typeof v === 'string' && fontById(v) ? v : DEFAULTS.font;
-}
+/** The strength to actually use: 0 while bold is switched off. */
+export const boldPercent = (s: Settings): number => (s.bionicOn ? s.bionic : 0);
+
+/** One step more or less bold, staying within the slider's range. */
+export const stepBold = (s: Settings, direction: 1 | -1): Settings => ({
+  ...s,
+  bionicOn: true,
+  bionic: Math.min(BIONIC_MAX, Math.max(BIONIC_MIN, Math.round(s.bionic / BIONIC_STEP) * BIONIC_STEP + direction * BIONIC_STEP)),
+});
 
 /** Label for a slider position: the nearest named mark when close to one, otherwise the percentage. */
 export function bionicLabel(value: number): string {

@@ -28,6 +28,18 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   backdrop-filter: blur(6px); border-bottom: 1px solid var(--line-c);
 }
 .brand { font-size: 1.1rem; margin: 0; }
+.quick { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
+.quick .group { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.quick select { min-height: 44px; border: 1px solid var(--line-c); background: var(--paper); border-radius: 10px; padding: 0 8px; max-width: 60vw; }
+.quick input[type="range"] { width: clamp(90px, 22vw, 200px); }
+.quick output { min-width: 3.2em; }
+.quick select { font-size: 0.95rem; }
+@media (max-width: 600px) { .bar { position: static; } }
+button.toggle { min-width: 6.5em; justify-content: center; }
+button.toggle[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button.step { width: 44px; justify-content: center; font-size: 1.3rem; padding: 0; }
+button:disabled { opacity: 0.4; cursor: default; }
+.fonts.dimmed { opacity: 0.55; }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; }
 
 main { padding: 24px 16px 96px; }

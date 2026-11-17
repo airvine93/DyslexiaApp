@@ -5,6 +5,7 @@ Dyslexia-friendly reading on Android, iPhone, Windows, Mac and Linux:
 - **A choice of reading fonts**: OpenDyslexic, Lexend, Atkinson Hyperlegible Next, Atkinson Hyperlegible, Andika, Comic Neue and Readex Pro, or the text's own font. All are free to bundle; each font's licence is in its folder under `packages/core/fonts/`.
 - **Bold the start of words** (bionic-style), with a slider from off to 80% of each word. Light, Medium and Strong match the steps in Emotion Shaper. Short words always get one bold letter, and longer words always keep at least one plain letter.
 - **Colour overlay** in any colour, with adjustable strength.
+- **Quick controls** always on screen: Font on/off, pick a font, Bold on/off, and − / + for less or more bold. Switching something off remembers your choice for when you switch it back on. Keyboard: Alt+F font on/off, Alt+B bold on/off, Alt+↑ / Alt+↓ more or less bold.
 - Text size, line spacing and letter spacing.
 
 ## What works where

@@ -1,6 +1,6 @@
 import './styles.css';
 import {
-  applyBionic, bionicLabel, cssVars, fontClasses, fontFaces, normalise, FONT_OFF, FONTS, tintColour, tintVisible, BIONIC_MARKS, DEFAULTS, TINT_PRESETS, type Settings,
+  applyBionic, bionicLabel, boldPercent, cssVars, fontClasses, fontFaces, normalise, stepBold, BIONIC_MAX, BIONIC_MIN, FONTS, tintColour, tintVisible, BIONIC_MARKS, DEFAULTS, TINT_PRESETS, type Settings,
 } from '@dr/core';
 import { fileToHtml, pastedToHtml, textToHtml } from './files';
 import { capabilities, onIncomingText, onScreenTintOff, setScreenTint } from './platform';
@@ -11,7 +11,7 @@ const write = (k: string, v: string) => { try { localStorage.setItem(k, v); } ca
 
 const WELCOME = `<h1>Welcome to Easy Reader</h1>
 <p>Paste some text, type it in, or open a file, and it will appear here in a way that is easier to read.</p>
-<p>Open <strong>Settings</strong> to change how it looks. You can choose a reading font such as OpenDyslexic or Lexend, choose how much of the start of each word is bold, and lay a coloured overlay over the page.</p>
+<p>Open <strong>Settings</strong> to change how it looks. Use the bar at the top to switch the reading font on or off, pick a font, and make words more or less bold. Settings has more: you can choose how much of the start of each word is bold, and lay a coloured overlay over the page.</p>
 <p>The bold slider goes from off, through light, medium and strong, up to most of each word. Short words always get one bold letter, and longer words always keep at least one plain letter at the end.</p>
 <p>On a computer or an Android phone the overlay can cover the whole screen, so it also tints other apps.</p>`;
 
@@ -19,7 +19,10 @@ const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as 
 const el = {
   page: $('page'), editor: $<HTMLFormElement>('editor'), editorText: $<HTMLTextAreaElement>('editor-text'),
   panel: $('panel'), toggle: $<HTMLButtonElement>('toggle-panel'), tint: $('tint'),
-  fonts: $('fonts'), bionic: $<HTMLInputElement>('bionic'), bionicOut: $<HTMLOutputElement>('bionic-out'),
+  fonts: $('fonts'), fontOn: $<HTMLInputElement>('font-on'), bionicOn: $<HTMLInputElement>('bionic-on'),
+  qFontOn: $<HTMLButtonElement>('q-font-on'), qFont: $<HTMLSelectElement>('q-font'), qBoldOn: $<HTMLButtonElement>('q-bold-on'),
+  qBold: $<HTMLInputElement>('q-bold'), qBoldOut: $<HTMLOutputElement>('q-bold-out'), qLess: $<HTMLButtonElement>('q-less'),
+  qMore: $<HTMLButtonElement>('q-more'), bionic: $<HTMLInputElement>('bionic'), bionicOut: $<HTMLOutputElement>('bionic-out'),
   tintOn: $<HTMLInputElement>('tint-on'), tintColour: $<HTMLInputElement>('tint-colour'), tintStrength: $<HTMLInputElement>('tint-strength'),
   tintOut: $<HTMLOutputElement>('tint-out'), swatches: $('swatches'), screenRow: $('screen-row'), screen: $<HTMLInputElement>('tint-screen'),
   screenHint: $('screen-hint'), size: $<HTMLInputElement>('size'), sizeOut: $<HTMLOutputElement>('size-out'),
@@ -42,7 +45,7 @@ let docHtml = read(KEY.doc) ?? WELCOME;
 /** Draw the document, then add the bold word fronts. */
 function renderDoc(): void {
   el.page.innerHTML = docHtml;
-  applyBionic(el.page, settings.bionic);
+  applyBionic(el.page, boldPercent(settings));
 }
 
 /** Apply everything except the bold fronts, which need the document redrawn. */
@@ -59,8 +62,20 @@ function renderLook(): void {
   el.tint.style.background = showInApp ? tintColour(s) : 'transparent';
 
   for (const b of el.fonts.querySelectorAll<HTMLButtonElement>('button')) b.setAttribute('aria-checked', String(b.dataset.font === s.font));
+  el.fontOn.checked = s.fontOn;
+  el.fonts.classList.toggle('dimmed', !s.fontOn);
+  el.qFontOn.setAttribute('aria-pressed', String(s.fontOn));
+  el.qFontOn.textContent = s.fontOn ? 'Font on' : 'Font off';
+  el.qFont.value = s.font;
+  el.bionicOn.checked = s.bionicOn;
   el.bionic.value = String(s.bionic);
-  el.bionicOut.value = bionicLabel(s.bionic);
+  el.bionicOut.value = s.bionicOn ? bionicLabel(s.bionic) : 'Off';
+  el.qBoldOn.setAttribute('aria-pressed', String(s.bionicOn));
+  el.qBoldOn.textContent = s.bionicOn ? 'Bold on' : 'Bold off';
+  el.qBold.value = String(s.bionic);
+  el.qBoldOut.value = s.bionicOn ? `${s.bionic}%` : 'Off';
+  el.qLess.disabled = s.bionicOn && s.bionic <= BIONIC_MIN;
+  el.qMore.disabled = s.bionicOn && s.bionic >= BIONIC_MAX;
   el.tintOn.checked = s.tint.on;
   el.tintColour.value = s.tint.colour;
   el.tintStrength.value = String(s.tint.strength);
@@ -75,11 +90,11 @@ function renderLook(): void {
 
 let screenTimer = 0;
 function update(change: Partial<Settings> | ((s: Settings) => Settings), redraw = false): void {
-  const before = settings.bionic;
+  const before = boldPercent(settings);
   settings = normalise(typeof change === 'function' ? change(settings) : { ...settings, ...change });
   write(KEY.settings, JSON.stringify(settings));
   renderLook();
-  if (redraw || settings.bionic !== before) renderDoc();
+  if (redraw || boldPercent(settings) !== before) renderDoc();
   // The whole-screen tint lives in another window; don't flood it while a slider is being dragged
   window.clearTimeout(screenTimer);
   screenTimer = window.setTimeout(() => { if (canTintScreen) void setScreenTint(settings, screenTint); }, 30);
@@ -113,8 +128,8 @@ for (const m of BIONIC_MARKS) {
   marks.append(o);
   const b = document.createElement('button');
   b.type = 'button'; b.textContent = m.label;
-  b.style.left = `${(m.value / 80) * 100}%`;
-  b.addEventListener('click', () => update({ bionic: m.value }));
+  b.style.left = `${((m.value - BIONIC_MIN) / (BIONIC_MAX - BIONIC_MIN)) * 100}%`;
+  b.addEventListener('click', () => update({ bionicOn: true, bionic: m.value }));
   markLabels.append(b);
 }
 for (const p of TINT_PRESETS) {
@@ -125,17 +140,36 @@ for (const p of TINT_PRESETS) {
   el.swatches.append(b);
 }
 
-for (const f of [...FONTS.map((x) => ({ id: x.id, name: x.name, about: x.about, family: x.family })), { id: FONT_OFF, name: 'Original font', about: 'Keep the text in its own font.', family: '' }]) {
+for (const f of FONTS) {
   const b = document.createElement('button');
   b.type = 'button'; b.role = 'radio'; b.dataset.font = f.id;
   const name = document.createElement('span'); name.className = 'font-name'; name.textContent = f.name;
-  if (f.family) name.style.fontFamily = `"${f.family}", system-ui, sans-serif`;
+  name.style.fontFamily = `"${f.family}", system-ui, sans-serif`;
   const about = document.createElement('span'); about.className = 'font-about'; about.textContent = f.about;
   b.append(name, about);
-  b.addEventListener('click', () => update({ font: f.id }));
+  b.addEventListener('click', () => update({ fontOn: true, font: f.id }));
   el.fonts.append(b);
+  el.qFont.append(new Option(f.name, f.id));
 }
-el.bionic.addEventListener('input', () => update({ bionic: Number(el.bionic.value) }));
+el.fontOn.addEventListener('change', () => update({ fontOn: el.fontOn.checked }));
+el.qFontOn.addEventListener('click', () => update((s) => ({ ...s, fontOn: !s.fontOn })));
+el.qFont.addEventListener('change', () => update({ fontOn: true, font: el.qFont.value }));
+el.bionicOn.addEventListener('change', () => update({ bionicOn: el.bionicOn.checked }));
+el.qBoldOn.addEventListener('click', () => update((s) => ({ ...s, bionicOn: !s.bionicOn })));
+el.qBold.addEventListener('input', () => update({ bionicOn: true, bionic: Number(el.qBold.value) }));
+el.qLess.addEventListener('click', () => update((s) => stepBold(s, -1)));
+el.qMore.addEventListener('click', () => update((s) => stepBold(s, 1)));
+// Keyboard: Alt+F font on/off, Alt+B bold on/off, Alt+Up / Alt+Down more or less bold
+document.addEventListener('keydown', (e) => {
+  if (!e.altKey || e.ctrlKey || e.metaKey) return;
+  const k = e.key.toLowerCase();
+  const code = e.code;
+  if (code === 'KeyF' || k === 'f') { e.preventDefault(); update((s) => ({ ...s, fontOn: !s.fontOn })); }
+  else if (code === 'KeyB' || k === 'b') { e.preventDefault(); update((s) => ({ ...s, bionicOn: !s.bionicOn })); }
+  else if (k === 'arrowup') { e.preventDefault(); update((s) => stepBold(s, 1)); }
+  else if (k === 'arrowdown') { e.preventDefault(); update((s) => stepBold(s, -1)); }
+});
+el.bionic.addEventListener('input', () => update({ bionicOn: true, bionic: Number(el.bionic.value) }));
 el.tintOn.addEventListener('change', () => update((s) => ({ ...s, tint: { ...s.tint, on: el.tintOn.checked } })));
 el.tintColour.addEventListener('input', () => update((s) => ({ ...s, tint: { ...s.tint, on: true, colour: el.tintColour.value } })));
 el.tintStrength.addEventListener('input', () => update((s) => ({ ...s, tint: { ...s.tint, strength: Number(el.tintStrength.value) } })));
@@ -148,7 +182,7 @@ $('reset').addEventListener('click', () => update(DEFAULTS));
 const setPanel = (open: boolean): void => {
   el.panel.hidden = !open;
   el.toggle.setAttribute('aria-expanded', String(open));
-  if (open) el.fonts.querySelector<HTMLButtonElement>('[aria-checked="true"]')?.focus();
+  if (open) el.fontOn.focus();
 };
 el.toggle.addEventListener("click", () => setPanel(Boolean(el.panel.hidden)));
 $('close-panel').addEventListener('click', () => { setPanel(false); el.toggle.focus(); });

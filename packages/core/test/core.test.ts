@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyBionic, applyBionicToNew, bionicCut, bionicLabel, clearBionic, normalise, pieces, splitWord, tintColour, DEFAULTS } from '../src';
+import { applyBionic, applyBionicToNew, bionicCut, bionicLabel, boldPercent, clearBionic, cssVars, fontClasses, normalise, pieces, splitWord, stepBold, tintColour, DEFAULTS } from '../src';
 
 describe('bionicCut', () => {
   it('is off at 0', () => expect(bionicCut('reading', 0)).toBe(0));
@@ -77,11 +77,14 @@ describe('DOM restyling', () => {
 describe('settings', () => {
   it('falls back to defaults for junk', () => {
     expect(normalise(null)).toEqual(DEFAULTS);
-    expect(normalise({ font: true }).font).toBe('opendyslexic');
-    expect(normalise({ font: false }).font).toBe('off');
-    expect(normalise({ font: 'lexend' }).font).toBe('lexend');
+    expect(normalise({ font: true })).toMatchObject({ fontOn: true, font: 'opendyslexic' });
+    expect(normalise({ font: false })).toMatchObject({ fontOn: false, font: 'opendyslexic' });
+    expect(normalise({ font: 'off' })).toMatchObject({ fontOn: false });
+    expect(normalise({ font: 'lexend' })).toMatchObject({ fontOn: true, font: 'lexend' });
     expect(normalise({ font: 'not-a-font' }).font).toBe('opendyslexic');
+    expect(normalise({ bionic: 0 })).toMatchObject({ bionicOn: false, bionic: DEFAULTS.bionic });
     expect(normalise({ bionic: 500, tint: { colour: 'red', strength: -4 } }).bionic).toBe(80);
+    expect(normalise({ bionic: 1 }).bionic).toBe(5);
     expect(normalise({ tint: { colour: 'red' } }).tint.colour).toBe(DEFAULTS.tint.colour);
     expect(normalise({ tint: { strength: -4 } }).tint.strength).toBe(0);
   });
@@ -113,5 +116,25 @@ describe('fonts', () => {
     const css = fontFaces((f) => `/f/${f}`);
     expect(css.match(/@font-face/g)!.length).toBe(FONTS.reduce((n, f) => n + f.faces.length, 0));
     expect(css).toContain('url("/f/lexend/lexend-latin-700-normal.woff2") format("woff2");font-weight:700');
+  });
+});
+
+describe('quick controls', () => {
+  it('switching bold off and on keeps the strength', () => {
+    const s = { ...DEFAULTS, bionic: 55 };
+    expect(boldPercent({ ...s, bionicOn: false })).toBe(0);
+    expect(boldPercent(s)).toBe(55);
+  });
+  it('steps bold up and down within range, and turns it on', () => {
+    expect(stepBold({ ...DEFAULTS, bionic: 40 }, 1).bionic).toBe(45);
+    expect(stepBold({ ...DEFAULTS, bionic: 80 }, 1).bionic).toBe(80);
+    expect(stepBold({ ...DEFAULTS, bionic: 5 }, -1).bionic).toBe(5);
+    expect(stepBold({ ...DEFAULTS, bionicOn: false }, 1).bionicOn).toBe(true);
+  });
+  it('switching the font off keeps the chosen font', () => {
+    const off = { ...DEFAULTS, font: 'lexend', fontOn: false };
+    expect(fontClasses(off)['dr-font']).toBe(false);
+    expect(cssVars(off)['--dr-family']).toBe('inherit');
+    expect(cssVars({ ...off, fontOn: true })['--dr-family']).toContain('ER Lexend');
   });
 });

@@ -5,11 +5,11 @@
   <header><strong>Easy Reader</strong><label class="switch"><input id="enabled" type="checkbox" /> On</label></header>
   <label class="switch"><input id="site" type="checkbox" /> <span>Use on <span id="host">this site</span></span></label>
   <section>
-    <div class="row"><label for="font">Font</label><select id="font"></select></div>
+    <div class="row"><label class="switch"><input id="font-on" type="checkbox" /> Reading font</label><select id="font" aria-label="Reading font"></select></div>
   </section>
   <section>
-    <div class="row"><label for="bionic">Bold the start of words</label><output id="bionic-out"></output></div>
-    <input id="bionic" type="range" min="0" max="80" step="1" />
+    <div class="row"><label class="switch"><input id="bionic-on" type="checkbox" /> Bold the start of words</label><output id="bionic-out"></output></div>
+    <div class="row"><button id="less" type="button" class="step" aria-label="Less bold">−</button><input id="bionic" type="range" min="5" max="80" step="1" aria-label="How much of each word is bold" /><button id="more" type="button" class="step" aria-label="More bold">+</button></div>
     <div class="marks" id="marks"></div>
   </section>
   <section>
