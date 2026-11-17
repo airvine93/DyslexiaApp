@@ -57,9 +57,10 @@ jobs:
       - run: npm ci
       - name: Build the Android app
         working-directory: apps/reader
-        env:
-          NDK_HOME: ${{ env.ANDROID_NDK_LATEST_HOME }}
         run: |
+          # The runner image ships an NDK; ANDROID_NDK_LATEST_HOME is a shell variable, not a workflow one
+          export NDK_HOME="${ANDROID_NDK_LATEST_HOME:-$(ls -d "$ANDROID_HOME"/ndk/* | sort -V | tail -1)}"
+          echo "Using NDK at $NDK_HOME"
           npx tauri android init --ci
           npx tauri android build --ci --debug --apk --target aarch64
       - uses: actions/upload-artifact@v4
