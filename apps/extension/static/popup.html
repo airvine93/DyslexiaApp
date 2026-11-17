@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8" /><title>Easy Reader</title><link rel="stylesheet" href="popup.css" /></head>
+<body>
+  <header><strong>Easy Reader</strong><label class="switch"><input id="enabled" type="checkbox" /> On</label></header>
+  <label class="switch"><input id="site" type="checkbox" /> <span>Use on <span id="host">this site</span></span></label>
+  <section>
+    <label class="switch"><input id="font" type="checkbox" /> OpenDyslexic font</label>
+  </section>
+  <section>
+    <div class="row"><label for="bionic">Bold the start of words</label><output id="bionic-out"></output></div>
+    <input id="bionic" type="range" min="0" max="80" step="1" />
+    <div class="marks" id="marks"></div>
+  </section>
+  <section>
+    <label class="switch"><input id="tint-on" type="checkbox" /> Colour overlay</label>
+    <div class="swatches" id="swatches"></div>
+    <div class="row"><label for="tint-colour">Pick any colour</label><input id="tint-colour" type="color" /></div>
+    <div class="row"><label for="tint-strength">Strength</label><output id="tint-out"></output></div>
+    <input id="tint-strength" type="range" min="0" max="70" step="1" />
+  </section>
+  <section>
+    <div class="row"><label for="spacing">Letter spacing</label><output id="spacing-out"></output></div>
+    <input id="spacing" type="range" min="0" max="30" step="1" />
+  </section>
+  <script src="popup.js"></script>
+</body>
+</html>

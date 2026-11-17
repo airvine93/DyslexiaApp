@@ -1,0 +1,42 @@
+# Builds installers for Windows, Mac and Linux. Download them from the run's "Artifacts" section.
+name: Desktop apps
+on:
+  workflow_dispatch:
+  pull_request:
+  push: { tags: ['v*'] }
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-22.04, name: linux, args: '' }
+          - { os: windows-latest, name: windows, args: '' }
+          - { os: macos-latest, name: mac, args: '--target universal-apple-darwin' }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - uses: dtolnay/rust-toolchain@stable
+        with: { targets: "${{ matrix.name == 'mac' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}" }
+      - uses: swatinem/rust-cache@v2
+        with: { workspaces: apps/reader/src-tauri }
+      - if: matrix.name == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev libxdo-dev
+      - run: npm ci
+      - uses: tauri-apps/tauri-action@v0
+        with:
+          projectPath: apps/reader
+          args: ${{ matrix.args }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: easy-reader-${{ matrix.name }}
+          path: |
+            apps/reader/src-tauri/target/**/release/bundle/**/*.deb
+            apps/reader/src-tauri/target/**/release/bundle/**/*.rpm
+            apps/reader/src-tauri/target/**/release/bundle/**/*.AppImage
+            apps/reader/src-tauri/target/**/release/bundle/**/*.msi
+            apps/reader/src-tauri/target/**/release/bundle/**/*.exe
+            apps/reader/src-tauri/target/**/release/bundle/**/*.dmg
+          if-no-files-found: warn

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f3ea" />
+  <title>Easy Reader</title>
+</head>
+<body>
+  <header class="bar">
+    <h1 class="brand">Easy Reader</h1>
+    <div class="actions">
+      <button id="paste" type="button" title="Read what you copied">Paste</button>
+      <label class="button" title="Open a text, Markdown, web page or PDF file">Open file
+        <input id="file" type="file" accept=".txt,.md,.markdown,.html,.htm,.pdf,text/plain,text/html,application/pdf" hidden />
+      </label>
+      <button id="edit" type="button">Type</button>
+      <button id="toggle-panel" type="button" aria-expanded="false" aria-controls="panel">Settings</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <article id="page" class="page" aria-live="polite"></article>
+    <form id="editor" class="page editor" hidden>
+      <label for="editor-text">Paste or type the text you want to read</label>
+      <textarea id="editor-text" rows="12"></textarea>
+      <div class="row"><button type="submit" class="primary">Read this</button><button type="button" id="editor-cancel">Cancel</button></div>
+    </form>
+  </main>
+
+  <aside id="panel" class="panel" hidden aria-label="Reading settings">
+    <div class="panel-head"><h2>Reading settings</h2><button id="close-panel" type="button" aria-label="Close settings">Done</button></div>
+
+    <section>
+      <label class="switch"><input id="font" type="checkbox" /> <span>OpenDyslexic font</span></label>
+    </section>
+
+    <section>
+      <div class="label-row"><label for="bionic">Bold the start of words</label><output id="bionic-out"></output></div>
+      <input id="bionic" type="range" min="0" max="80" step="1" list="bionic-marks" />
+      <datalist id="bionic-marks"></datalist>
+      <div class="marks" id="bionic-mark-labels"></div>
+    </section>
+
+    <section>
+      <label class="switch"><input id="tint-on" type="checkbox" /> <span>Colour overlay</span></label>
+      <label class="switch" id="screen-row" hidden><input id="tint-screen" type="checkbox" /> <span>Cover the whole screen, over other apps</span></label>
+      <p class="hint" id="screen-hint" hidden></p>
+      <div class="swatches" id="swatches" role="radiogroup" aria-label="Overlay colour"></div>
+      <div class="label-row"><label for="tint-colour">Pick any colour</label><input id="tint-colour" type="color" /></div>
+      <div class="label-row"><label for="tint-strength">Overlay strength</label><output id="tint-out"></output></div>
+      <input id="tint-strength" type="range" min="0" max="70" step="1" />
+    </section>
+
+    <section>
+      <div class="label-row"><label for="size">Text size</label><output id="size-out"></output></div>
+      <input id="size" type="range" min="12" max="48" step="1" />
+      <div class="label-row"><label for="line">Line spacing</label><output id="line-out"></output></div>
+      <input id="line" type="range" min="1" max="3" step="0.1" />
+      <div class="label-row"><label for="spacing">Letter spacing</label><output id="spacing-out"></output></div>
+      <input id="spacing" type="range" min="0" max="30" step="1" />
+    </section>
+
+    <section><button id="reset" type="button">Reset to defaults</button></section>
+  </aside>
+
+  <div id="tint" aria-hidden="true"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
