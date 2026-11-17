@@ -1,5 +1,5 @@
-# Builds installers for Windows, Mac and Linux. Download them from the run's "Artifacts" section.
-name: Desktop apps
+# Builds installers for Windows, Mac and Linux, and a test app for Android. Download them from the run's "Artifacts" section.
+name: Apps
 on:
   workflow_dispatch:
   pull_request:
@@ -40,3 +40,30 @@ jobs:
             apps/reader/src-tauri/target/**/release/bundle/**/*.exe
             apps/reader/src-tauri/target/**/release/bundle/**/*.dmg
           if-no-files-found: warn
+
+  # A test build for Android phones (signed with a throwaway debug key, so it installs only by sideloading).
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - uses: dtolnay/rust-toolchain@stable
+        with: { targets: 'aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android' }
+      - uses: swatinem/rust-cache@v2
+        with: { workspaces: apps/reader/src-tauri }
+      - run: npm ci
+      - name: Build the Android app
+        working-directory: apps/reader
+        env:
+          NDK_HOME: ${{ env.ANDROID_NDK_LATEST_HOME }}
+        run: |
+          npx tauri android init --ci
+          npx tauri android build --ci --debug --apk --target aarch64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: easy-reader-android
+          path: apps/reader/src-tauri/gen/android/app/build/outputs/apk/**/*.apk
+          if-no-files-found: error

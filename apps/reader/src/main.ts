@@ -123,13 +123,13 @@ function renderLook(): void {
   el.fontOn.checked = s.fontOn;
   el.fonts.classList.toggle('dimmed', !s.fontOn);
   el.qFontOn.setAttribute('aria-pressed', String(s.fontOn));
-  el.qFontOn.innerHTML = `Font<span class="state"> ${s.fontOn ? 'on' : 'off'}</span>`;
+  el.qFontOn.innerHTML = `Font<span class="state">&nbsp;${s.fontOn ? 'on' : 'off'}</span>`;
   el.qFont.value = s.font;
   el.bionicOn.checked = s.bionicOn;
   el.bionic.value = String(s.bionic);
   el.bionicOut.value = s.bionicOn ? bionicLabel(s.bionic) : 'Off';
   el.qBoldOn.setAttribute('aria-pressed', String(s.bionicOn));
-  el.qBoldOn.innerHTML = `Bold<span class="state"> ${s.bionicOn ? 'on' : 'off'}</span>`;
+  el.qBoldOn.innerHTML = `Bold<span class="state">&nbsp;${s.bionicOn ? 'on' : 'off'}</span>`;
   el.qBold.value = String(s.bionic);
   el.qBoldOut.value = s.bionicOn ? `${s.bionic}%` : 'Off';
   el.qLess.disabled = s.bionicOn && s.bionic <= BIONIC_MIN;
