@@ -1,5 +1,5 @@
 // Runs on every web page: restyles the page's own text, so it also works on sites you are signed in to.
-import { applyBionic, applyBionicToNew, clearBionic, cssVars, fontFaces, pageCss, tintColour, tintVisible, WRAP, type Settings } from '@dr/core';
+import { applyBionic, applyBionicToNew, clearBionic, cssVars, fontClasses, fontFaces, pageCss, tintColour, tintVisible, WRAP, type Settings } from '@dr/core';
 import { load, type State } from './store';
 
 const html = document.documentElement;
@@ -10,10 +10,7 @@ function ensureStyle(): void {
   if (document.getElementById('dr-style')) return;
   const style = document.createElement('style');
   style.id = 'dr-style';
-  style.textContent = fontFaces({
-    regular: chrome.runtime.getURL('fonts/OpenDyslexic-Regular.otf'),
-    bold: chrome.runtime.getURL('fonts/OpenDyslexic-Bold.otf'),
-  }) + pageCss();
+  style.textContent = fontFaces((file) => chrome.runtime.getURL(`fonts/${file}`)) + pageCss();
   (document.head ?? html).append(style);
 }
 
@@ -52,7 +49,8 @@ function apply(state: State): void {
   const off = !state.enabled || state.offSites.includes(location.hostname);
   const s = off ? null : state.settings;
   if (s) ensureStyle();
-  html.classList.toggle('dr-font', !!s?.font);
+  const classes = s ? fontClasses(s) : { 'dr-font': false, 'dr-thin-bold': false };
+  for (const [cls, on] of Object.entries(classes)) html.classList.toggle(cls, on);
   html.classList.toggle('dr-spacing', !!s && s.letterSpacing > 0);
   if (s) for (const [k, v] of Object.entries(cssVars(s))) html.style.setProperty(k, v);
   setTint(s);

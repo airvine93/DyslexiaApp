@@ -1,8 +1,6 @@
 import './styles.css';
-import regularUrl from '@dr/core/fonts/OpenDyslexic-Regular.otf?url';
-import boldUrl from '@dr/core/fonts/OpenDyslexic-Bold.otf?url';
 import {
-  applyBionic, bionicLabel, fontFaces, normalise, tintColour, tintVisible, BIONIC_MARKS, DEFAULTS, TINT_PRESETS, type Settings,
+  applyBionic, bionicLabel, cssVars, fontClasses, fontFaces, normalise, FONT_OFF, FONTS, tintColour, tintVisible, BIONIC_MARKS, DEFAULTS, TINT_PRESETS, type Settings,
 } from '@dr/core';
 import { fileToHtml, pastedToHtml, textToHtml } from './files';
 import { capabilities, onIncomingText, onScreenTintOff, setScreenTint } from './platform';
@@ -13,7 +11,7 @@ const write = (k: string, v: string) => { try { localStorage.setItem(k, v); } ca
 
 const WELCOME = `<h1>Welcome to Easy Reader</h1>
 <p>Paste some text, type it in, or open a file, and it will appear here in a way that is easier to read.</p>
-<p>Open <strong>Settings</strong> to change how it looks. You can switch the OpenDyslexic font on or off, choose how much of the start of each word is bold, and lay a coloured overlay over the page.</p>
+<p>Open <strong>Settings</strong> to change how it looks. You can choose a reading font such as OpenDyslexic or Lexend, choose how much of the start of each word is bold, and lay a coloured overlay over the page.</p>
 <p>The bold slider goes from off, through light, medium and strong, up to most of each word. Short words always get one bold letter, and longer words always keep at least one plain letter at the end.</p>
 <p>On a computer or an Android phone the overlay can cover the whole screen, so it also tints other apps.</p>`;
 
@@ -21,7 +19,7 @@ const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as 
 const el = {
   page: $('page'), editor: $<HTMLFormElement>('editor'), editorText: $<HTMLTextAreaElement>('editor-text'),
   panel: $('panel'), toggle: $<HTMLButtonElement>('toggle-panel'), tint: $('tint'),
-  font: $<HTMLInputElement>('font'), bionic: $<HTMLInputElement>('bionic'), bionicOut: $<HTMLOutputElement>('bionic-out'),
+  fonts: $('fonts'), bionic: $<HTMLInputElement>('bionic'), bionicOut: $<HTMLOutputElement>('bionic-out'),
   tintOn: $<HTMLInputElement>('tint-on'), tintColour: $<HTMLInputElement>('tint-colour'), tintStrength: $<HTMLInputElement>('tint-strength'),
   tintOut: $<HTMLOutputElement>('tint-out'), swatches: $('swatches'), screenRow: $('screen-row'), screen: $<HTMLInputElement>('tint-screen'),
   screenHint: $('screen-hint'), size: $<HTMLInputElement>('size'), sizeOut: $<HTMLOutputElement>('size-out'),
@@ -30,7 +28,10 @@ const el = {
 };
 
 const fontStyle = document.createElement('style');
-fontStyle.textContent = fontFaces({ regular: regularUrl, bold: boldUrl });
+// Every bundled font file, as a URL the app can load. Only the chosen font is actually downloaded by the browser.
+const fontFiles = import.meta.glob('../../../packages/core/fonts/**/*.{otf,woff2}', { query: '?url', import: 'default', eager: true }) as Record<string, string>;
+const fontUrl = (file: string) => fontFiles[`../../../packages/core/fonts/${file}`] ?? '';
+fontStyle.textContent = fontFaces(fontUrl);
 document.head.append(fontStyle);
 
 let settings: Settings = normalise(JSON.parse(read(KEY.settings) ?? 'null'));
@@ -47,8 +48,9 @@ function renderDoc(): void {
 /** Apply everything except the bold fronts, which need the document redrawn. */
 function renderLook(): void {
   const s = settings;
-  document.documentElement.classList.toggle('dyslexic', s.font);
+  for (const [cls, on] of Object.entries(fontClasses(s))) document.documentElement.classList.toggle(cls, on);
   const root = document.documentElement.style;
+  root.setProperty('--family', cssVars(s)['--dr-family']!);
   root.setProperty('--size', `${s.size}px`);
   root.setProperty('--line', String(s.lineHeight));
   root.setProperty('--ls', `${s.letterSpacing / 100}em`);
@@ -56,7 +58,7 @@ function renderLook(): void {
   const showInApp = tintVisible(s) && !(canTintScreen && screenTint);
   el.tint.style.background = showInApp ? tintColour(s) : 'transparent';
 
-  el.font.checked = s.font;
+  for (const b of el.fonts.querySelectorAll<HTMLButtonElement>('button')) b.setAttribute('aria-checked', String(b.dataset.font === s.font));
   el.bionic.value = String(s.bionic);
   el.bionicOut.value = bionicLabel(s.bionic);
   el.tintOn.checked = s.tint.on;
@@ -123,7 +125,16 @@ for (const p of TINT_PRESETS) {
   el.swatches.append(b);
 }
 
-el.font.addEventListener('change', () => update({ font: el.font.checked }));
+for (const f of [...FONTS.map((x) => ({ id: x.id, name: x.name, about: x.about, family: x.family })), { id: FONT_OFF, name: 'Original font', about: 'Keep the text in its own font.', family: '' }]) {
+  const b = document.createElement('button');
+  b.type = 'button'; b.role = 'radio'; b.dataset.font = f.id;
+  const name = document.createElement('span'); name.className = 'font-name'; name.textContent = f.name;
+  if (f.family) name.style.fontFamily = `"${f.family}", system-ui, sans-serif`;
+  const about = document.createElement('span'); about.className = 'font-about'; about.textContent = f.about;
+  b.append(name, about);
+  b.addEventListener('click', () => update({ font: f.id }));
+  el.fonts.append(b);
+}
 el.bionic.addEventListener('input', () => update({ bionic: Number(el.bionic.value) }));
 el.tintOn.addEventListener('change', () => update((s) => ({ ...s, tint: { ...s.tint, on: el.tintOn.checked } })));
 el.tintColour.addEventListener('input', () => update((s) => ({ ...s, tint: { ...s.tint, on: true, colour: el.tintColour.value } })));
@@ -137,7 +148,7 @@ $('reset').addEventListener('click', () => update(DEFAULTS));
 const setPanel = (open: boolean): void => {
   el.panel.hidden = !open;
   el.toggle.setAttribute('aria-expanded', String(open));
-  if (open) el.font.focus();
+  if (open) el.fonts.querySelector<HTMLButtonElement>('[aria-checked="true"]')?.focus();
 };
 el.toggle.addEventListener("click", () => setPanel(Boolean(el.panel.hidden)));
 $('close-panel').addEventListener('click', () => { setPanel(false); el.toggle.focus(); });

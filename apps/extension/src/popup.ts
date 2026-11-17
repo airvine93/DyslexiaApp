@@ -1,9 +1,9 @@
-import { bionicLabel, BIONIC_MARKS, TINT_PRESETS, type Settings } from '@dr/core';
+import { bionicLabel, BIONIC_MARKS, FONT_OFF, FONTS, TINT_PRESETS, type Settings } from '@dr/core';
 import { load, save, type State } from './store';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const el = {
-  enabled: $<HTMLInputElement>('enabled'), site: $<HTMLInputElement>('site'), host: $('host'), font: $<HTMLInputElement>('font'),
+  enabled: $<HTMLInputElement>('enabled'), site: $<HTMLInputElement>('site'), host: $('host'), font: $<HTMLSelectElement>('font'),
   bionic: $<HTMLInputElement>('bionic'), bionicOut: $<HTMLOutputElement>('bionic-out'), marks: $('marks'),
   tintOn: $<HTMLInputElement>('tint-on'), swatches: $('swatches'), tintColour: $<HTMLInputElement>('tint-colour'),
   tintStrength: $<HTMLInputElement>('tint-strength'), tintOut: $<HTMLOutputElement>('tint-out'),
@@ -18,7 +18,7 @@ function render(): void {
   el.enabled.checked = state.enabled;
   el.site.checked = !state.offSites.includes(host);
   el.site.disabled = !host;
-  el.font.checked = s.font;
+  el.font.value = s.font;
   el.bionic.value = String(s.bionic); el.bionicOut.value = bionicLabel(s.bionic);
   el.tintOn.checked = s.tint.on; el.tintColour.value = s.tint.colour;
   el.tintStrength.value = String(s.tint.strength); el.tintOut.value = `${s.tint.strength}%`;
@@ -57,7 +57,8 @@ async function start(): Promise<void> {
     state.offSites = el.site.checked ? state.offSites.filter((h) => h !== host) : [...new Set([...state.offSites, host])];
     void save({ offSites: state.offSites });
   });
-  el.font.addEventListener('change', () => set((s) => ({ ...s, font: el.font.checked })));
+  for (const f of [...FONTS, { id: FONT_OFF, name: 'Page\'s own font' }]) el.font.append(new Option(f.name, f.id));
+  el.font.addEventListener('change', () => set((s) => ({ ...s, font: el.font.value })));
   el.bionic.addEventListener('input', () => set((s) => ({ ...s, bionic: Number(el.bionic.value) })));
   el.tintOn.addEventListener('change', () => set((s) => ({ ...s, tint: { ...s.tint, on: el.tintOn.checked } })));
   el.tintColour.addEventListener('input', () => set((s) => ({ ...s, tint: { ...s.tint, on: true, colour: el.tintColour.value } })));

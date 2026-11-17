@@ -2,7 +2,7 @@
 
 Dyslexia-friendly reading on Android, iPhone, Windows, Mac and Linux:
 
-- **OpenDyslexic font**, on or off.
+- **A choice of reading fonts**: OpenDyslexic, Lexend, Atkinson Hyperlegible Next, Atkinson Hyperlegible, Andika, Comic Neue and Readex Pro, or the text's own font. All are free to bundle; each font's licence is in its folder under `packages/core/fonts/`.
 - **Bold the start of words** (bionic-style), with a slider from off to 80% of each word. Light, Medium and Strong match the steps in Emotion Shaper. Short words always get one bold letter, and longer words always keep at least one plain letter.
 - **Colour overlay** in any colour, with adjustable strength.
 - Text size, line spacing and letter spacing.
@@ -44,4 +44,14 @@ npm -w @dr/reader run build:single  # the whole reader as one HTML file, in apps
 
 ## Fonts
 
-OpenDyslexic by Abbie Gonzalez, free to use and share; licence in `packages/core/fonts/OpenDyslexic-LICENSE.txt`.
+| Font | By | Licence |
+|---|---|---|
+| OpenDyslexic | Abbie Gonzalez | Free licence based on Bitstream Vera |
+| Lexend | The Lexend Project Authors | SIL Open Font License 1.1 |
+| Atkinson Hyperlegible Next | The Atkinson Hyperlegible Next Project Authors | SIL Open Font License 1.1 |
+| Atkinson Hyperlegible | Braille Institute of America | SIL Open Font License 1.1 |
+| Andika | SIL International | SIL Open Font License 1.1 |
+| Comic Neue | The Comic Neue Project Authors | SIL Open Font License 1.1 |
+| Readex Pro | The Readex Pro Project Authors | SIL Open Font License 1.1 |
+
+The OFL fonts are the unmodified Latin and Latin Extended files published by [Fontsource](https://fontsource.org). Full licence texts are beside the font files.

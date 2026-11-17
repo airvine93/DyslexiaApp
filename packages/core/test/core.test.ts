@@ -77,6 +77,10 @@ describe('DOM restyling', () => {
 describe('settings', () => {
   it('falls back to defaults for junk', () => {
     expect(normalise(null)).toEqual(DEFAULTS);
+    expect(normalise({ font: true }).font).toBe('opendyslexic');
+    expect(normalise({ font: false }).font).toBe('off');
+    expect(normalise({ font: 'lexend' }).font).toBe('lexend');
+    expect(normalise({ font: 'not-a-font' }).font).toBe('opendyslexic');
     expect(normalise({ bionic: 500, tint: { colour: 'red', strength: -4 } }).bionic).toBe(80);
     expect(normalise({ tint: { colour: 'red' } }).tint.colour).toBe(DEFAULTS.tint.colour);
     expect(normalise({ tint: { strength: -4 } }).tint.strength).toBe(0);
@@ -88,5 +92,26 @@ describe('settings', () => {
   });
   it('builds the tint colour', () => {
     expect(tintColour({ ...DEFAULTS, tint: { on: true, colour: '#ff8000', strength: 25 } })).toBe('rgba(255, 128, 0, 0.25)');
+  });
+});
+
+describe('fonts', () => {
+  it('has a licence and existing files for every font', async () => {
+    const { existsSync } = await import('node:fs');
+    const { FONTS } = await import('../src');
+    const { fileURLToPath } = await import('node:url');
+    const { join } = await import('node:path');
+    const dir = join(fileURLToPath(import.meta.url), '../../fonts');
+    for (const f of FONTS) {
+      for (const face of f.faces) expect(existsSync(join(dir, face.file)), face.file).toBe(true);
+      const folder = f.faces[0]!.file.split('/')[0];
+      expect(existsSync(join(dir, folder!, 'LICENSE.txt')) || existsSync(join(dir, folder!, 'OpenDyslexic-LICENSE.txt')), folder).toBe(true);
+    }
+  });
+  it('writes a face for each file', async () => {
+    const { FONTS, fontFaces } = await import('../src');
+    const css = fontFaces((f) => `/f/${f}`);
+    expect(css.match(/@font-face/g)!.length).toBe(FONTS.reduce((n, f) => n + f.faces.length, 0));
+    expect(css).toContain('url("/f/lexend/lexend-latin-700-normal.woff2") format("woff2");font-weight:700');
   });
 });

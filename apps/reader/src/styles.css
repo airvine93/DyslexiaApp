@@ -8,7 +8,8 @@
 @media (prefers-color-scheme: dark) {
   :root { --bg: #17191d; --paper: #1f2228; --ink: #e9e6df; --muted: #a5abb5; --line-c: #343842; --accent: #8fb8e6; --accent-ink: #10151c; }
 }
-html.dyslexic { --ui-font: "OpenDyslexic", system-ui, sans-serif; }
+html.dr-font { --ui-font: var(--family); }
+.panel .font-about { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body { background: var(--bg); color: var(--ink); font-family: var(--ui-font); min-height: 100vh; }
@@ -43,7 +44,7 @@ main { padding: 24px 16px 96px; }
 .page table { border-collapse: collapse; } .page :is(td, th) { border: 1px solid var(--line-c); padding: 0.3em 0.6em; }
 b.dr-b { font-weight: 700; }
 /* OpenDyslexic Bold is only a little heavier than Regular; a thin outline makes the bold fronts easier to see */
-html.dyslexic b.dr-b { -webkit-text-stroke: 0.035em currentColor; }
+html.dr-thin-bold b.dr-b { -webkit-text-stroke: 0.035em currentColor; }
 
 .editor label { display: block; font-size: 1rem; margin-bottom: 8px; }
 .editor textarea {
@@ -77,6 +78,12 @@ input[type="color"] { width: 48px; height: 36px; border: 1px solid var(--line-c)
 .swatches { display: flex; flex-wrap: wrap; gap: 8px; }
 .swatches button { width: 40px; height: 40px; min-height: 0; padding: 0; border-radius: 50%; border: 2px solid var(--line-c); }
 .swatches button[aria-checked="true"] { border-color: var(--ink); box-shadow: 0 0 0 3px var(--paper) inset; }
+.panel h3 { font-size: 1rem; margin: 0; }
+.fonts { display: grid; gap: 6px; }
+.fonts button { display: grid; gap: 2px; text-align: left; justify-items: start; padding: 8px 12px; }
+.fonts button[aria-checked="true"] { border: 2px solid var(--accent); padding: 7px 11px; }
+.font-name { font-size: 1.05rem; }
+.font-about { font-size: 0.8rem; color: var(--muted); }
 .hint { color: var(--muted); font-size: 0.9rem; margin: 0; }
 
 #tint { position: fixed; inset: 0; pointer-events: none; z-index: 20; mix-blend-mode: multiply; transition: background-color 0.2s; }

@@ -1,7 +1,7 @@
 /** Everything the person can change. The same shape is used by the reader app, the screen tint and the browser extension. */
 export interface Settings {
-  /** Show text in OpenDyslexic. */
-  font: boolean;
+  /** Which reading font to show text in (an id from FONTS), or "off" to keep the text's own font. */
+  font: string;
   /** Bold-front strength: the share of each word, in percent, that is made bold. 0 is off. */
   bionic: number;
   /** Colour tint laid over what you are reading. */
@@ -14,11 +14,13 @@ export interface Settings {
   letterSpacing: number;
 }
 
+import { FONT_OFF, fontById } from './fonts';
+
 export const BIONIC_MAX = 80;
 export const TINT_MAX = 70;
 
 export const DEFAULTS: Settings = {
-  font: true,
+  font: 'opendyslexic',
   bionic: 40,
   tint: { on: false, colour: '#fff3b0', strength: 30 },
   size: 20,
@@ -56,7 +58,7 @@ export function normalise(raw: unknown): Settings {
   const t = (r.tint && typeof r.tint === 'object' ? r.tint : {}) as Record<string, unknown>;
   const colour = typeof t.colour === 'string' && /^#[0-9a-f]{6}$/i.test(t.colour) ? t.colour.toLowerCase() : DEFAULTS.tint.colour;
   return {
-    font: typeof r.font === 'boolean' ? r.font : DEFAULTS.font,
+    font: normaliseFont(r.font),
     bionic: clamp(r.bionic, 0, BIONIC_MAX, DEFAULTS.bionic),
     tint: {
       on: typeof t.on === 'boolean' ? t.on : DEFAULTS.tint.on,
@@ -67,6 +69,13 @@ export function normalise(raw: unknown): Settings {
     lineHeight: clamp(r.lineHeight, 1, 3, DEFAULTS.lineHeight),
     letterSpacing: clamp(r.letterSpacing, 0, 30, DEFAULTS.letterSpacing),
   };
+}
+
+/** Older settings stored the font as on/off, meaning OpenDyslexic. */
+function normaliseFont(v: unknown): string {
+  if (v === true) return 'opendyslexic';
+  if (v === false || v === FONT_OFF) return FONT_OFF;
+  return typeof v === 'string' && fontById(v) ? v : DEFAULTS.font;
 }
 
 /** Label for a slider position: the nearest named mark when close to one, otherwise the percentage. */
