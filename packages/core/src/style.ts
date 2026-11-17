@@ -21,6 +21,8 @@ const KEEP_FONT = ':not(code):not(pre):not(kbd):not(samp):not(i):not([class*="ic
 export function pageCss(): string {
   return `html.dr-font body, html.dr-font body *${KEEP_FONT}{font-family:var(--dr-family) !important}
 html.dr-spacing body *${KEEP_FONT}{letter-spacing:var(--dr-ls) !important;word-spacing:var(--dr-ws) !important}
+html.dr-line body :is(p,li,dd,dt,blockquote,td,th,figcaption,h1,h2,h3,h4,h5,h6){line-height:var(--dr-lh) !important}
+html.dr-zoom body{zoom:var(--dr-zoom)}
 b.dr-b{font-weight:700 !important}
 html.dr-thin-bold b.dr-b{-webkit-text-stroke:0.035em currentColor}
 #dr-tint{position:fixed;inset:0;pointer-events:none;z-index:2147483647;mix-blend-mode:multiply;transition:background-color .2s}`;

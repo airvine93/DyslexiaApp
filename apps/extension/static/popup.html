@@ -4,6 +4,9 @@
 <body>
   <header><strong>Easy Reader</strong><label class="switch"><input id="enabled" type="checkbox" /> On</label></header>
   <label class="switch"><input id="site" type="checkbox" /> <span>Use on <span id="host">this site</span></span></label>
+  <p class="note" id="site-note" hidden></p>
+  <button id="open-reader" type="button" class="primary">Open in Easy Reader</button>
+  <p class="hint">Opens this page, or the text you selected, in the full reader with read aloud, ruler and page colours.</p>
   <section>
     <div class="row"><label class="switch"><input id="font-on" type="checkbox" /> Reading font</label><select id="font" aria-label="Reading font"></select></div>
   </section>
@@ -20,8 +23,20 @@
     <input id="tint-strength" type="range" min="0" max="70" step="1" />
   </section>
   <section>
+    <div class="row"><label for="zoom">Text size</label><output id="zoom-out"></output></div>
+    <input id="zoom" type="range" min="100" max="200" step="10" />
     <div class="row"><label for="spacing">Letter spacing</label><output id="spacing-out"></output></div>
     <input id="spacing" type="range" min="0" max="30" step="1" />
+    <div class="row"><label class="switch"><input id="line-on" type="checkbox" /> Line spacing</label><output id="line-out"></output></div>
+    <input id="line" type="range" min="1" max="3" step="0.1" aria-label="Line spacing" />
+  </section>
+  <section>
+    <details>
+      <summary>Use settings from the Easy Reader app</summary>
+      <p class="hint">In the app, open Settings and press Copy my settings code. Paste it here.</p>
+      <form class="row" id="code-form"><input id="code-in" type="text" placeholder="Settings code" aria-label="Settings code" /><button type="submit">Use</button></form>
+      <button id="code-copy" type="button">Copy these settings as a code</button>
+    </details>
   </section>
   <script src="popup.js"></script>
 </body>
