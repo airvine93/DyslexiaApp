@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node scripts/copy-ocr.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/copy-ocr.mjs",
     "build": "vite build",
     "build:single": "vite build --mode single",
     "preview": "vite preview",
@@ -13,7 +15,11 @@
   "dependencies": {
     "@dr/core": "*",
     "@tauri-apps/api": "^2.12.0",
-    "pdfjs-dist": "^6.5.0"
+    "@tesseract.js-data/eng": "^1.0.0",
+    "fflate": "^0.8.3",
+    "hyphen": "^1.14.1",
+    "pdfjs-dist": "^6.5.0",
+    "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.12.0",

@@ -15,8 +15,11 @@ export function bionicCut(word: string, percent: number): number {
 
 export interface Piece { text: string; word: boolean }
 
-/** Letters, digits, apostrophes and hyphens make a word; everything else is a gap. */
-const WORDS = /([\p{L}\p{M}\p{N}'’-]+)|([^\p{L}\p{M}\p{N}'’-]+)/gu;
+/**
+ * Letters, digits and apostrophes make a word; everything else is a gap. Hyphens are gaps too, so each part of
+ * "well-known" gets its own bold start.
+ */
+const WORDS = /([\p{L}\p{M}\p{N}'’]+)|([^\p{L}\p{M}\p{N}'’]+)/gu;
 
 /** Split text into words and the gaps between them. Joining the pieces gives back the original text. */
 export function pieces(text: string): Piece[] {

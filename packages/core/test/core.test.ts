@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyBionic, applyBionicToNew, bionicCut, bionicLabel, boldPercent, clearBionic, cssVars, fontClasses, normalise, pieces, splitWord, stepBold, tintColour, DEFAULTS } from '../src';
+import { applyBionic, applyBionicToNew, bionicCut, bionicLabel, boldPercent, clearBionic, cssVars, fontClasses, normalise, pieces, readSettingsCode, settingsCode, splitWord, stepBold, tintColour, DEFAULTS, PAGE_THEMES } from '../src';
 
 describe('bionicCut', () => {
   it('is off at 0', () => expect(bionicCut('reading', 0)).toBe(0));
@@ -27,6 +27,10 @@ describe('pieces', () => {
   it('round-trips the text', () => {
     const t = "It's a well-known fact — 42 people read, 3x faster!";
     expect(pieces(t).map((p) => p.text).join('')).toBe(t);
+  });
+  it('gives each part of a hyphenated word its own bold start', () => {
+    expect(pieces('well-known').filter((p) => p.word).map((p) => p.text)).toEqual(['well', 'known']);
+    expect(pieces("don't").filter((p) => p.word).map((p) => p.text)).toEqual(["don't"]);
   });
   it('leaves numbers plain', () => {
     expect(pieces('42 cats').filter((p) => p.word).map((p) => p.text)).toEqual(['cats']);
@@ -136,5 +140,37 @@ describe('quick controls', () => {
     expect(fontClasses(off)['dr-font']).toBe(false);
     expect(cssVars(off)['--dr-family']).toBe('inherit');
     expect(cssVars({ ...off, fontOn: true })['--dr-family']).toContain('ER Lexend');
+  });
+});
+
+describe('reading look and sharing', () => {
+  it('keeps new settings valid', () => {
+    expect(normalise({ theme: 'peach', width: 500, ruler: { on: true, lines: 9 }, speech: { rate: 9, voice: 7 } })).toMatchObject({
+      theme: 'peach', width: 100, ruler: { on: true, lines: 5 }, speech: { rate: 2, voice: '' },
+    });
+    expect(normalise({ theme: 'nope' }).theme).toBe('auto');
+    expect(normalise({ noItalics: 'yes' }).noItalics).toBe(false);
+  });
+  it('keeps older saved settings working', () => {
+    const old = { fontOn: true, font: 'lexend', bionicOn: true, bionic: 40, tint: { on: true, colour: '#bcd9ff', strength: 20 }, size: 22, lineHeight: 2, letterSpacing: 4 };
+    expect(normalise(old)).toMatchObject({ ...old, theme: 'auto', width: DEFAULTS.width, wordHelp: true });
+  });
+  it('has readable text on every page colour', () => {
+    const lum = (hex: string) => {
+      const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+      return 0.2126 * c[0]! + 0.7152 * c[1]! + 0.0722 * c[2]!;
+    };
+    for (const t of PAGE_THEMES) {
+      const [a, b] = [lum(t.paper), lum(t.ink)].sort((x, y) => y - x);
+      expect((a! + 0.05) / (b! + 0.05), t.name).toBeGreaterThan(7);
+    }
+  });
+  it('round-trips a settings code', () => {
+    const s = normalise({ font: 'andika', bionic: 55, theme: 'mint', speech: { rate: 1.3, voice: 'Ünïcode voice' } });
+    const code = settingsCode(s);
+    expect(code.startsWith('ER1-')).toBe(true);
+    expect(readSettingsCode(`  here it is: ${code} `)).toEqual(s);
+    expect(readSettingsCode('hello')).toBeNull();
+    expect(readSettingsCode('ER1-!!!')).toBeNull();
   });
 });

@@ -1,7 +1,7 @@
 [hidden] { display: none !important; }
 :root {
   --bg: #f7f3ea; --paper: #fffdf8; --ink: #22252b; --muted: #5d6470; --line-c: #e3dccd; --accent: #2f5d8a; --accent-ink: #fff;
-  --size: 20px; --line: 1.7; --ls: 0.04em; --ws: 0.18em;
+  --size: 20px; --line: 1.7; --ls: 0.08em; --ws: 0.26em; --width: 66ch;
   --ui-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   color-scheme: light dark;
 }
@@ -28,13 +28,13 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   backdrop-filter: blur(6px); border-bottom: 1px solid var(--line-c);
 }
 .brand { font-size: 1.1rem; margin: 0; }
+.top { flex-basis: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .quick { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
 .quick .group { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .quick select { min-height: 44px; border: 1px solid var(--line-c); background: var(--paper); border-radius: 10px; padding: 0 8px; max-width: 60vw; }
 .quick input[type="range"] { width: clamp(90px, 22vw, 200px); }
 .quick output { min-width: 3.2em; }
 .quick select { font-size: 0.95rem; }
-@media (max-width: 600px) { .bar { position: static; } }
 button.toggle { min-width: 6.5em; justify-content: center; }
 button.toggle[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 button.step { width: 44px; justify-content: center; font-size: 1.3rem; padding: 0; }
@@ -44,7 +44,7 @@ button:disabled { opacity: 0.4; cursor: default; }
 
 main { padding: 24px 16px 96px; }
 .page {
-  max-width: 68ch; margin: 0 auto; background: var(--paper); border: 1px solid var(--line-c); border-radius: 14px;
+  max-width: var(--width); margin: 0 auto; background: var(--paper); border: 1px solid var(--line-c); border-radius: 14px;
   padding: clamp(20px, 5vw, 48px); font-size: var(--size); line-height: var(--line); letter-spacing: var(--ls); word-spacing: var(--ws);
   overflow-wrap: break-word;
 }
@@ -55,6 +55,9 @@ main { padding: 24px 16px 96px; }
 .page blockquote { margin: 0 0 1em; padding-left: 1em; border-left: 4px solid var(--line-c); }
 .page table { border-collapse: collapse; } .page :is(td, th) { border: 1px solid var(--line-c); padding: 0.3em 0.6em; }
 b.dr-b { font-weight: 700; }
+html.no-italics .page :is(em, i) { font-style: normal; font-weight: 700; }
+.page { cursor: text; }
+.page a { color: inherit; }
 /* OpenDyslexic Bold is only a little heavier than Regular; a thin outline makes the bold fronts easier to see */
 html.dr-thin-bold b.dr-b { -webkit-text-stroke: 0.035em currentColor; }
 
@@ -97,9 +100,98 @@ input[type="color"] { width: 48px; height: 36px; border: 1px solid var(--line-c)
 .font-name { font-size: 1.05rem; }
 .font-about { font-size: 0.8rem; color: var(--muted); }
 .hint { color: var(--muted); font-size: 0.9rem; margin: 0; }
+.panel .row input[type="text"] { flex: 1; min-width: 0; min-height: 44px; border: 1px solid var(--line-c); border-radius: 10px; padding: 0 10px; background: var(--bg); }
 
 #tint { position: fixed; inset: 0; pointer-events: none; z-index: 20; mix-blend-mode: multiply; transition: background-color 0.2s; }
+/* Multiplying a colour onto a dark page barely shows, so on dark pages the overlay is laid on as a soft wash instead */
+html.dark-page #tint { mix-blend-mode: soft-light; }
+
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Open menu */
+.menu-wrap { position: relative; }
+.menu {
+  position: absolute; z-index: 15; top: calc(100% + 6px); left: 0; min-width: 260px; max-width: calc(100vw - 20px); display: grid; gap: 6px;
+  padding: 10px; background: var(--paper); border: 1px solid var(--line-c); border-radius: 12px; box-shadow: 0 10px 30px rgb(0 0 0 / 0.15);
+}
+.menu > button, .menu > label { width: 100%; justify-content: flex-start; }
+.recent h2 { font-size: 0.85rem; color: var(--muted); margin: 6px 4px 4px; font-weight: 600; }
+.recent ul, .setups { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.recent li, .setups li { display: flex; gap: 4px; }
+.recent-open { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; text-align: left; }
+.recent-open[aria-current="true"] { border-color: var(--accent); }
+.setups li > button:first-child { flex: 1; }
+button.recent-del { width: 44px; justify-content: center; padding: 0; flex: none; }
+
+/* Read aloud */
+button.say[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.player {
+  position: fixed; z-index: 12; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%); display: flex; gap: 6px;
+  align-items: center; padding: 8px; background: var(--paper); border: 1px solid var(--line-c); border-radius: 14px;
+  box-shadow: 0 8px 30px rgb(0 0 0 / 0.18); max-width: calc(100vw - 16px); flex-wrap: wrap; justify-content: center;
+}
+.player button { min-width: 44px; justify-content: center; }
+.player .speed { display: flex; align-items: center; gap: 6px; font-size: 0.9rem; color: var(--muted); }
+.player select, .panel select { min-height: 40px; border: 1px solid var(--line-c); background: var(--paper); color: var(--ink); border-radius: 10px; padding: 0 6px; font: inherit; font-size: 0.95rem; max-width: 100%; }
+.panel .label-row select { max-width: 65%; }
+::highlight(er-sentence) { background-color: color-mix(in srgb, var(--accent) 16%, transparent); }
+::highlight(er-word) { background-color: #ffd54a; color: #111; }
+html.dark-page ::highlight(er-word) { background-color: #8a6d00; color: #fff; }
+
+/* Reading ruler: a clear band, everything else gently dimmed */
+.ruler {
+  position: fixed; z-index: 4; pointer-events: none; border-radius: 6px; box-shadow: 0 0 0 100vmax rgb(0 0 0 / 0.28);
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent); transition: top 0.05s linear;
+}
+html.dark-page .ruler { box-shadow: 0 0 0 100vmax rgb(0 0 0 / 0.5); }
+
+/* Page colours */
+.themes { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px; }
+.themes button { gap: 8px; padding: 6px 10px; justify-content: flex-start; font-size: 0.9rem; }
+.themes button[aria-checked="true"] { border: 2px solid var(--accent); padding: 5px 9px; }
+.theme-chip { width: 30px; height: 30px; border-radius: 6px; border: 1px solid rgb(0 0 0 / 0.15); display: grid; place-items: center; font-size: 0.8rem; flex: none; }
+
+/* Word help */
+.word-card {
+  position: fixed; z-index: 25; width: min(360px, calc(100vw - 16px)); padding: 14px; background: var(--paper); color: var(--ink);
+  border: 1px solid var(--line-c); border-radius: 14px; box-shadow: 0 10px 30px rgb(0 0 0 / 0.2); display: grid; gap: 8px;
+}
+.word-big { font-size: 2rem; line-height: 1.2; overflow-wrap: anywhere; }
+.word-parts { font-size: 1.4rem; color: var(--accent); letter-spacing: 0.05em; }
+.word-card .row { flex-wrap: wrap; margin: 0; }
+
+/* Help me choose */
+dialog.setup {
+  width: min(720px, calc(100vw - 16px)); max-height: calc(100vh - 32px); border: 1px solid var(--line-c); border-radius: 16px; padding: 18px;
+  background: var(--paper); color: var(--ink); font-family: var(--ui-font);
+}
+dialog.setup::backdrop { background: rgb(0 0 0 / 0.45); }
+.setup-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+dialog.setup h2 { font-size: 1.3rem; margin: 10px 0 14px; }
+.setup-choices { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 10px; margin-bottom: 12px; }
+.setup-choices button { display: grid; gap: 6px; text-align: left; padding: 8px; align-items: start; }
+.setup-sample { margin: 0; padding: 10px 12px; border-radius: 8px; font-size: 1.05rem; background: var(--bg); color: var(--ink); }
+.setup-label { font-weight: 600; padding: 0 4px; }
+dialog.setup > .setup-sample { margin-bottom: 12px; }
 .toast {
   position: fixed; z-index: 30; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: calc(100% - 32px); background: var(--ink);
   color: var(--bg); padding: 12px 16px; border-radius: 10px; font-size: 0.95rem;
 }
+.panel .row { margin-top: 0; flex-wrap: wrap; }
+
+/* Phones: one slim row of actions and one of quick controls, so the text starts near the top of the screen */
+@media (max-width: 600px) {
+  .bar { padding: max(6px, env(safe-area-inset-top)) 10px 6px; gap: 6px; }
+  .brand, .wide-only, .say-label, .toggle .state { display: none !important; }
+  button.toggle[aria-pressed="false"] { text-decoration: line-through; }
+  .top { justify-content: flex-start; }
+  .actions { flex-wrap: nowrap; width: 100%; }
+  .actions > :last-child { margin-left: auto; }
+  .quick { gap: 6px 10px; flex-wrap: nowrap; overflow-x: auto; }
+  .quick .group { flex: none; }
+  .quick select { max-width: 40vw; }
+  .quick .group { gap: 4px; }
+  button.toggle { min-width: 0; padding: 0.5em 0.7em; }
+  main { padding: 12px 8px 96px; }
+}
+@media (max-width: 380px) { .quick select { max-width: 30vw; } button.step { width: 40px; } }
