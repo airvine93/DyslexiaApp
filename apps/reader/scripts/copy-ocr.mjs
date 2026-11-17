@@ -2,10 +2,11 @@
 // and scanned PDFs works offline and never sends anything to the internet. Runs before every dev and build.
 import { cpSync, mkdirSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 const require = createRequire(import.meta.url);
-const out = new URL('../public/ocr/', import.meta.url).pathname;
+const out = fileURLToPath(new URL('../public/ocr/', import.meta.url));
 mkdirSync(out, { recursive: true });
 const pkg = (name) => dirname(require.resolve(`${name}/package.json`));
 const files = [
