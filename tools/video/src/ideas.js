@@ -7,6 +7,7 @@
  *   e  landing words, shown large in the accent colour (optional)
  *   b  the short lesson. This paragraph is the one that turns hard to read and is then restyled.
  *   k  kicker override (optional)
+ *   m  motif: a background made for this idea, used in place of the dealt one (optional)
  *   v  quotes only: true once someone has checked the wording against the primary text
  *
  * Lessons stay under about 32 words so they fit in every reading font.
@@ -14,7 +15,7 @@
  */
 export const IDEAS = [
   // ---- words (1-20)
-  { t: 'word', h: 'petrichor', s: 'the smell of', e: 'rain on dry earth', b: 'Petrichor was coined in 1964 by two Australian scientists. It joins the Greek words for stone and for the fluid said to run in the veins of the gods.' },
+  { t: 'word', m: 'rain', h: 'petrichor', s: 'the smell of', e: 'rain on dry earth', b: 'Petrichor was coined in 1964 by two Australian scientists. It joins the Greek words for stone and for the fluid said to run in the veins of the gods.' },
   { t: 'word', h: 'serendipity', s: 'a happy', e: 'accident', b: 'Horace Walpole made the word up in 1754. He took it from a fairy tale, The Three Princes of Serendip, whose heroes kept finding things they were not looking for.' },
   { t: 'word', h: 'mellifluous', s: 'a sound that', e: 'flows like honey', b: 'From the Latin mel, honey, and fluere, to flow. Use it for a voice or a tune so smooth and sweet that it seems to pour.' },
   { t: 'word', h: 'ephemeral', s: 'lasting only', e: 'a very short time', b: 'From the Greek ephemeros, lasting a day. In English it was first used for fevers, and for insects that live for a single day, like the mayfly.' },

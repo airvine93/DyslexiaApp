@@ -28,126 +28,126 @@ The type follows the idea. Every other setting is dealt out evenly and shuffled,
 
 | # | Idea | Hook | Background | Colours | Made hard by | Question | Change | Font | Features | Close | Pace | Camera | Secs |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | **petrichor** the smell of **rain on dry earth** | label | dust | dusk, sky | faint | a2 | scatter | Readex Pro | font | c4 | fast | still | 17 |
-| 2 | **serendipity** a happy **accident** | label | dust | ink, mint | swim | a4 | morph | Comic Neue | font | c3 | fast | push | 17 |
-| 3 | **mellifluous** a sound that **flows like honey** | label | letters | ink, orchid | crowd | a3 | sweep | Andika | ruler | c2 | slow | push | 27 |
-| 4 | **ephemeral** lasting only **a very short time** | label | letters | navy, sky | swim | a3 | wave | Comic Neue | ruler | c4 | medium | drift | 22 |
-| 5 | **defenestrate** to throw someone **out of a window** | label | orbs | cream, peach | crowd | a3 | wave | Lexend | ruler | c3 | slow | push | 27 |
-| 6 | **apricity** the warmth of **the sun in winter** | question | orbs | dusk, sky | cramped | a1 | flip | Andika | font | c4 | medium | drift | 21 |
-| 7 | **susurrus** a soft **whispering sound** | label | ribbons | cream, rose | cramped | a4 | wave | OpenDyslexic | ruler | c4 | medium | still | 22 |
-| 8 | **halcyon** calm, happy **and peaceful** | label | dust | dusk, periwinkle | cramped | a4 | flip | Lexend | ruler | c3 | slow | drift | 27 |
-| 9 | **ineffable** too great **for words** | label | ribbons | cream, periwinkle | glare | a1 | morph | Atkinson Hyperlegible | bionic | c4 | fast | still | 19 |
-| 10 | **overmorrow** the day **after tomorrow** | label | dust | cream, peach | cramped | a4 | wave | Andika | tint | c2 | medium | push | 22 |
-| 11 | **tsundoku** buying books and **letting them pile up** | question | dust | cream, mint | glare | a3 | scatter | Comic Neue | all | c2 | fast | push | 22 |
-| 12 | **komorebi** sunlight through **the leaves of trees** | question | orbs | ink, mint | faint | a1 | morph | Lexend | tint | c4 | fast | still | 18 |
-| 13 | **saudade** a deep longing for **something absent** | question | dust | cream, mint | crowd | a3 | flip | Andika | bionic | c4 | slow | push | 27 |
-| 14 | **hygge** cosy and **content together** | label | orbs | navy, sky | swim | a1 | scatter | Atkinson Hyperlegible | tint | c3 | slow | drift | 26 |
-| 15 | **sonorous** deep, full **and rich in sound** | label | dust | dusk, mint | cramped | a2 | sweep | Atkinson Hyperlegible | bionic | c1 | medium | drift | 22 |
-| 16 | **lethologica** when you cannot **find the word** | label | dust | dusk, sky | faint | a3 | scatter | OpenDyslexic | font | c1 | medium | drift | 20 |
-| 17 | **quixotic** noble, hopeful **and wildly unrealistic** | label | letters | ink, butter | crowd | a2 | flip | Atkinson Hyperlegible | ruler | c2 | fast | drift | 18 |
-| 18 | **sesquipedalian** a lover of **very long words** | question | ribbons | dusk, rose | glare | a4 | sweep | OpenDyslexic | all | c4 | slow | still | 33 |
-| 19 | **eloquent** speaking **clearly and well** | question | orbs | navy, apricot | swim | a4 | sweep | Andika | tint | c3 | medium | push | 22 |
-| 20 | **luminous** full of **light** | question | ribbons | dusk, apricot | faint | a4 | flip | Readex Pro | font | c1 | slow | still | 23 |
+| 1 | **petrichor** the smell of **rain on dry earth** | label | dust | dusk, sky | faint | a2 | scatter | Readex Pro | font | c4 | fast | still | 21 |
+| 2 | **serendipity** a happy **accident** | label | dust | ink, mint | swim | a4 | morph | Comic Neue | font | c3 | fast | push | 21 |
+| 3 | **mellifluous** a sound that **flows like honey** | label | letters | ink, orchid | crowd | a3 | sweep | Andika | ruler | c2 | slow | push | 33 |
+| 4 | **ephemeral** lasting only **a very short time** | label | letters | navy, sky | swim | a3 | wave | Comic Neue | ruler | c4 | medium | drift | 28 |
+| 5 | **defenestrate** to throw someone **out of a window** | label | orbs | cream, peach | crowd | a3 | wave | Lexend | ruler | c3 | slow | push | 35 |
+| 6 | **apricity** the warmth of **the sun in winter** | question | orbs | dusk, sky | cramped | a1 | flip | Andika | font | c4 | medium | drift | 26 |
+| 7 | **susurrus** a soft **whispering sound** | label | ribbons | cream, rose | cramped | a4 | wave | OpenDyslexic | ruler | c4 | medium | still | 28 |
+| 8 | **halcyon** calm, happy **and peaceful** | label | dust | dusk, periwinkle | cramped | a4 | flip | Lexend | ruler | c3 | slow | drift | 35 |
+| 9 | **ineffable** too great **for words** | label | ribbons | cream, periwinkle | glare | a1 | morph | Atkinson Hyperlegible | bionic | c4 | fast | still | 24 |
+| 10 | **overmorrow** the day **after tomorrow** | label | dust | cream, peach | cramped | a4 | wave | Andika | tint | c2 | medium | push | 27 |
+| 11 | **tsundoku** buying books and **letting them pile up** | question | dust | cream, mint | glare | a3 | scatter | Comic Neue | all | c2 | fast | push | 28 |
+| 12 | **komorebi** sunlight through **the leaves of trees** | question | orbs | ink, mint | faint | a1 | morph | Lexend | tint | c4 | fast | still | 22 |
+| 13 | **saudade** a deep longing for **something absent** | question | dust | cream, mint | crowd | a3 | flip | Andika | bionic | c4 | slow | push | 34 |
+| 14 | **hygge** cosy and **content together** | label | orbs | navy, sky | swim | a1 | scatter | Atkinson Hyperlegible | tint | c3 | slow | drift | 33 |
+| 15 | **sonorous** deep, full **and rich in sound** | label | dust | dusk, mint | cramped | a2 | sweep | Atkinson Hyperlegible | bionic | c1 | medium | drift | 27 |
+| 16 | **lethologica** when you cannot **find the word** | label | dust | dusk, sky | faint | a3 | scatter | OpenDyslexic | font | c1 | medium | drift | 24 |
+| 17 | **quixotic** noble, hopeful **and wildly unrealistic** | label | letters | ink, butter | crowd | a2 | flip | Atkinson Hyperlegible | ruler | c2 | fast | drift | 21 |
+| 18 | **sesquipedalian** a lover of **very long words** | question | ribbons | dusk, rose | glare | a4 | sweep | OpenDyslexic | all | c4 | slow | still | 43 |
+| 19 | **eloquent** speaking **clearly and well** | question | orbs | navy, apricot | swim | a4 | sweep | Andika | tint | c3 | medium | push | 27 |
+| 20 | **luminous** full of **light** | question | ribbons | dusk, apricot | faint | a4 | flip | Readex Pro | font | c1 | slow | still | 28 |
 
 ## Where words come from (21-40)
 
 | # | Idea | Hook | Background | Colours | Made hard by | Question | Change | Font | Features | Close | Pace | Camera | Secs |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 21 | **muscle** comes from the Latin for **little mouse** | question | dust | ink, periwinkle | cramped | a2 | flip | Andika | bionic | c1 | medium | push | 21 |
-| 22 | **disaster** means **bad star** | question | letters | navy, orchid | cramped | a1 | scatter | OpenDyslexic | font | c4 | medium | push | 19 |
-| 23 | **goodbye** is short for **God be with ye** | label | dust | cream, apricot | faint | a3 | sweep | Atkinson Hyperlegible | ruler | c4 | fast | push | 18 |
-| 24 | **clue** once meant **a ball of thread** | question | ribbons | dusk, sky | swim | a1 | sweep | Comic Neue | font | c3 | slow | still | 26 |
-| 25 | **window** means **wind eye** | question | ribbons | ink, butter | swim | a3 | morph | Readex Pro | tint | c1 | fast | drift | 18 |
-| 26 | **daisy** means **day’s eye** | question | orbs | dusk, butter | cramped | a2 | wave | Andika | ruler | c4 | fast | still | 18 |
-| 27 | **companion** means someone you **share bread with** | question | orbs | navy, apricot | crowd | a2 | morph | Andika | all | c1 | fast | push | 21 |
-| 28 | **robot** comes from the Czech for **forced labour** | label | letters | dusk, rose | swim | a4 | morph | Andika | bionic | c2 | medium | drift | 21 |
-| 29 | **quarantine** means **forty days** | label | dust | navy, mint | cramped | a1 | wave | Atkinson Hyperlegible | all | c3 | fast | still | 22 |
-| 30 | **nice** once meant **foolish** | label | ribbons | dusk, sky | crowd | a2 | wave | Lexend | bionic | c4 | slow | drift | 26 |
-| 31 | **silly** once meant **blessed** | question | ribbons | navy, apricot | faint | a1 | scatter | Readex Pro | bionic | c4 | slow | drift | 26 |
-| 32 | **nightmare** has nothing to do with **horses** | question | orbs | ink, orchid | glare | a2 | sweep | Comic Neue | ruler | c1 | fast | drift | 17 |
-| 33 | **whisky** means **water of life** | label | dust | ink, peach | crowd | a3 | sweep | Lexend | tint | c1 | medium | drift | 20 |
-| 34 | **checkmate** comes from the Persian for **the king is helpless** | label | dust | dusk, orchid | glare | a3 | wave | Readex Pro | font | c3 | slow | drift | 23 |
-| 35 | **algebra** comes from the Arabic for **mending broken parts** | question | dust | cream, peach | swim | a2 | sweep | Lexend | font | c2 | fast | push | 16 |
-| 36 | **sarcasm** comes from the Greek for **tearing flesh** | question | letters | cream, periwinkle | crowd | a4 | flip | Lexend | font | c2 | fast | push | 17 |
-| 37 | **tragedy** probably means **goat song** | label | letters | navy, peach | swim | a3 | wave | OpenDyslexic | bionic | c3 | slow | still | 26 |
-| 38 | **candidate** means **dressed in white** | question | letters | navy, mint | crowd | a3 | flip | OpenDyslexic | bionic | c3 | medium | push | 22 |
-| 39 | **shampoo** comes from the Hindi for **press and knead** | label | letters | ink, peach | faint | a3 | morph | Atkinson Hyperlegible | all | c2 | medium | still | 26 |
-| 40 | **emoji** has nothing to do with **emotion** | label | letters | cream, sky | glare | a2 | sweep | Atkinson Hyperlegible | tint | c3 | slow | still | 25 |
+| 21 | **muscle** comes from the Latin for **little mouse** | question | dust | ink, periwinkle | cramped | a2 | flip | Andika | bionic | c1 | medium | push | 26 |
+| 22 | **disaster** means **bad star** | question | letters | navy, orchid | cramped | a1 | scatter | OpenDyslexic | font | c4 | medium | push | 23 |
+| 23 | **goodbye** is short for **God be with ye** | label | dust | cream, apricot | faint | a3 | sweep | Atkinson Hyperlegible | ruler | c4 | fast | push | 21 |
+| 24 | **clue** once meant **a ball of thread** | question | ribbons | dusk, sky | swim | a1 | sweep | Comic Neue | font | c3 | slow | still | 33 |
+| 25 | **window** means **wind eye** | question | ribbons | ink, butter | swim | a3 | morph | Readex Pro | tint | c1 | fast | drift | 23 |
+| 26 | **daisy** means **day’s eye** | question | orbs | dusk, butter | cramped | a2 | wave | Andika | ruler | c4 | fast | still | 21 |
+| 27 | **companion** means someone you **share bread with** | question | orbs | navy, apricot | crowd | a2 | morph | Andika | all | c1 | fast | push | 27 |
+| 28 | **robot** comes from the Czech for **forced labour** | label | letters | dusk, rose | swim | a4 | morph | Andika | bionic | c2 | medium | drift | 25 |
+| 29 | **quarantine** means **forty days** | label | dust | navy, mint | cramped | a1 | wave | Atkinson Hyperlegible | all | c3 | fast | still | 28 |
+| 30 | **nice** once meant **foolish** | label | ribbons | dusk, sky | crowd | a2 | wave | Lexend | bionic | c4 | slow | drift | 32 |
+| 31 | **silly** once meant **blessed** | question | ribbons | navy, apricot | faint | a1 | scatter | Readex Pro | bionic | c4 | slow | drift | 32 |
+| 32 | **nightmare** has nothing to do with **horses** | question | orbs | ink, orchid | glare | a2 | sweep | Comic Neue | ruler | c1 | fast | drift | 21 |
+| 33 | **whisky** means **water of life** | label | dust | ink, peach | crowd | a3 | sweep | Lexend | tint | c1 | medium | drift | 24 |
+| 34 | **checkmate** comes from the Persian for **the king is helpless** | label | dust | dusk, orchid | glare | a3 | wave | Readex Pro | font | c3 | slow | drift | 27 |
+| 35 | **algebra** comes from the Arabic for **mending broken parts** | question | dust | cream, peach | swim | a2 | sweep | Lexend | font | c2 | fast | push | 20 |
+| 36 | **sarcasm** comes from the Greek for **tearing flesh** | question | letters | cream, periwinkle | crowd | a4 | flip | Lexend | font | c2 | fast | push | 20 |
+| 37 | **tragedy** probably means **goat song** | label | letters | navy, peach | swim | a3 | wave | OpenDyslexic | bionic | c3 | slow | still | 32 |
+| 38 | **candidate** means **dressed in white** | question | letters | navy, mint | crowd | a3 | flip | OpenDyslexic | bionic | c3 | medium | push | 27 |
+| 39 | **shampoo** comes from the Hindi for **press and knead** | label | letters | ink, peach | faint | a3 | morph | Atkinson Hyperlegible | all | c2 | medium | still | 33 |
+| 40 | **emoji** has nothing to do with **emotion** | label | letters | cream, sky | glare | a2 | sweep | Atkinson Hyperlegible | tint | c3 | slow | still | 30 |
 
 ## Quotes (41-60)
 
 | # | Idea | Hook | Background | Colours | Made hard by | Question | Change | Font | Features | Close | Pace | Camera | Secs |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 41 | "Brevity is the soul of wit." William Shakespeare, Hamlet | label | letters | dusk, peach | swim | a3 | morph | OpenDyslexic | bionic | c2 | fast | drift | 18 |
-| 42 | "Words, words, words." William Shakespeare, Hamlet | label | dust | navy, butter | swim | a1 | flip | Atkinson Hyperlegible | tint | c3 | slow | still | 28 |
-| 43 | "The pen is mightier than the sword." Edward Bulwer-Lytton, Richelieu, 1839 | label | ribbons | ink, sky | swim | a3 | scatter | Andika | ruler | c2 | slow | push | 27 |
-| 44 | "Language is the dress of thought." Samuel Johnson | label | letters | navy, apricot | crowd | a4 | sweep | Lexend | tint | c4 | slow | drift | 27 |
-| 45 | "The limits of my language mean the limits of my world." Ludwig Wittgenstein, Tractatus, 1922 translation | label | dust | navy, rose | crowd | a2 | morph | Comic Neue | all | c3 | medium | still | 25 |
-| 46 | "Curiouser and curiouser!" Lewis Carroll, Alice’s Adventures in Wonderland | label | letters | navy, periwinkle | cramped | a1 | scatter | OpenDyslexic | ruler | c3 | fast | still | 18 |
-| 47 | "A word is dead when it is said, some say. I say it just begins to live that day." Emily Dickinson | question | orbs | ink, butter | faint | a1 | sweep | Atkinson Hyperlegible | ruler | c4 | medium | drift | 22 |
-| 48 | "There is no frigate like a book to take us lands away." Emily Dickinson | question | orbs | dusk, mint | glare | a1 | scatter | Atkinson Hyperlegible | tint | c2 | medium | still | 21 |
-| 49 | "Hope is the thing with feathers that perches in the soul." Emily Dickinson | label | orbs | navy, rose | cramped | a1 | flip | Andika | all | c2 | slow | still | 32 |
-| 50 | "Some books are to be tasted, others to be swallowed, and some few to be chewed and digested." Francis Bacon, Of Studies | question | dust | dusk, mint | cramped | a2 | sweep | Comic Neue | tint | c1 | fast | still | 18 |
-| 51 | "Reading maketh a full man, conference a ready man, and writing an exact man." Francis Bacon, Of Studies | label | letters | navy, orchid | faint | a3 | morph | Readex Pro | tint | c2 | medium | drift | 22 |
-| 52 | "A little learning is a dangerous thing." Alexander Pope, An Essay on Criticism | question | orbs | navy, apricot | faint | a4 | flip | Atkinson Hyperlegible | all | c2 | medium | drift | 26 |
-| 53 | "To err is human; to forgive, divine." Alexander Pope, An Essay on Criticism | question | orbs | ink, periwinkle | cramped | a4 | wave | Comic Neue | bionic | c3 | slow | push | 25 |
-| 54 | "It was the best of times, it was the worst of times." Charles Dickens, A Tale of Two Cities | label | orbs | ink, orchid | cramped | a4 | morph | Atkinson Hyperlegible | font | c1 | medium | drift | 20 |
-| 55 | "Call me Ishmael." Herman Melville, Moby-Dick | question | letters | dusk, mint | cramped | a2 | wave | OpenDyslexic | ruler | c2 | medium | push | 22 |
-| 56 | "All the world’s a stage, and all the men and women merely players." William Shakespeare, As You Like It | label | orbs | dusk, butter | swim | a2 | flip | Atkinson Hyperlegible | font | c4 | fast | drift | 17 |
-| 57 | "We are such stuff as dreams are made on." William Shakespeare, The Tempest | question | ribbons | navy, sky | glare | a2 | flip | Comic Neue | bionic | c3 | slow | drift | 26 |
-| 58 | "The best words in the best order." Samuel Taylor Coleridge, on poetry | question | letters | cream, apricot | swim | a2 | wave | Comic Neue | font | c1 | medium | push | 19 |
-| 59 | "Words are, of course, the most powerful drug used by mankind." Rudyard Kipling, 1923 | label | letters | ink, peach | crowd | a4 | wave | Andika | tint | c1 | slow | push | 27 |
-| 60 | "Tell all the truth but tell it slant." Emily Dickinson | label | letters | navy, periwinkle | swim | a1 | flip | Readex Pro | all | c2 | fast | push | 21 |
+| 41 | "Brevity is the soul of wit." William Shakespeare, Hamlet | label | letters | dusk, peach | swim | a3 | morph | OpenDyslexic | bionic | c2 | fast | drift | 22 |
+| 42 | "Words, words, words." William Shakespeare, Hamlet | label | dust | navy, butter | swim | a1 | flip | Atkinson Hyperlegible | tint | c3 | slow | still | 35 |
+| 43 | "The pen is mightier than the sword." Edward Bulwer-Lytton, Richelieu, 1839 | label | ribbons | ink, sky | swim | a3 | scatter | Andika | ruler | c2 | slow | push | 33 |
+| 44 | "Language is the dress of thought." Samuel Johnson | label | letters | navy, apricot | crowd | a4 | sweep | Lexend | tint | c4 | slow | drift | 33 |
+| 45 | "The limits of my language mean the limits of my world." Ludwig Wittgenstein, Tractatus, 1922 translation | label | dust | navy, rose | crowd | a2 | morph | Comic Neue | all | c3 | medium | still | 31 |
+| 46 | "Curiouser and curiouser!" Lewis Carroll, Alice’s Adventures in Wonderland | label | letters | navy, periwinkle | cramped | a1 | scatter | OpenDyslexic | ruler | c3 | fast | still | 23 |
+| 47 | "A word is dead when it is said, some say. I say it just begins to live that day." Emily Dickinson | question | orbs | ink, butter | faint | a1 | sweep | Atkinson Hyperlegible | ruler | c4 | medium | drift | 26 |
+| 48 | "There is no frigate like a book to take us lands away." Emily Dickinson | question | orbs | dusk, mint | glare | a1 | scatter | Atkinson Hyperlegible | tint | c2 | medium | still | 25 |
+| 49 | "Hope is the thing with feathers that perches in the soul." Emily Dickinson | label | orbs | navy, rose | cramped | a1 | flip | Andika | all | c2 | slow | still | 40 |
+| 50 | "Some books are to be tasted, others to be swallowed, and some few to be chewed and digested." Francis Bacon, Of Studies | question | dust | dusk, mint | cramped | a2 | sweep | Comic Neue | tint | c1 | fast | still | 22 |
+| 51 | "Reading maketh a full man, conference a ready man, and writing an exact man." Francis Bacon, Of Studies | label | letters | navy, orchid | faint | a3 | morph | Readex Pro | tint | c2 | medium | drift | 26 |
+| 52 | "A little learning is a dangerous thing." Alexander Pope, An Essay on Criticism | question | orbs | navy, apricot | faint | a4 | flip | Atkinson Hyperlegible | all | c2 | medium | drift | 33 |
+| 53 | "To err is human; to forgive, divine." Alexander Pope, An Essay on Criticism | question | orbs | ink, periwinkle | cramped | a4 | wave | Comic Neue | bionic | c3 | slow | push | 30 |
+| 54 | "It was the best of times, it was the worst of times." Charles Dickens, A Tale of Two Cities | label | orbs | ink, orchid | cramped | a4 | morph | Atkinson Hyperlegible | font | c1 | medium | drift | 24 |
+| 55 | "Call me Ishmael." Herman Melville, Moby-Dick | question | letters | dusk, mint | cramped | a2 | wave | OpenDyslexic | ruler | c2 | medium | push | 27 |
+| 56 | "All the world’s a stage, and all the men and women merely players." William Shakespeare, As You Like It | label | orbs | dusk, butter | swim | a2 | flip | Atkinson Hyperlegible | font | c4 | fast | drift | 20 |
+| 57 | "We are such stuff as dreams are made on." William Shakespeare, The Tempest | question | ribbons | navy, sky | glare | a2 | flip | Comic Neue | bionic | c3 | slow | drift | 32 |
+| 58 | "The best words in the best order." Samuel Taylor Coleridge, on poetry | question | letters | cream, apricot | swim | a2 | wave | Comic Neue | font | c1 | medium | push | 23 |
+| 59 | "Words are, of course, the most powerful drug used by mankind." Rudyard Kipling, 1923 | label | letters | ink, peach | crowd | a4 | wave | Andika | tint | c1 | slow | push | 33 |
+| 60 | "Tell all the truth but tell it slant." Emily Dickinson | label | letters | navy, periwinkle | swim | a1 | flip | Readex Pro | all | c2 | fast | push | 26 |
 
 ## Word facts (61-80)
 
 | # | Idea | Hook | Background | Colours | Made hard by | Question | Change | Font | Features | Close | Pace | Camera | Secs |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 61 | **typewriter** can be typed using only **the top row of keys** | label | ribbons | ink, butter | swim | a3 | wave | Comic Neue | ruler | c1 | slow | still | 26 |
-| 62 | **rhythm** has no **a, e, i, o or u** | question | ribbons | cream, sky | cramped | a1 | wave | Lexend | tint | c3 | slow | still | 26 |
-| 63 | **uncopyrightable** uses fifteen letters and **repeats none** | label | letters | ink, mint | cramped | a2 | sweep | Lexend | tint | c1 | slow | still | 25 |
-| 64 | **almost** has its letters in **alphabetical order** | question | ribbons | navy, orchid | cramped | a2 | sweep | Atkinson Hyperlegible | all | c4 | slow | still | 31 |
-| 65 | **bookkeeper** has three double letters **in a row** | label | orbs | dusk, peach | faint | a1 | scatter | Readex Pro | font | c1 | slow | still | 23 |
-| 66 | **queue** sounds the same with **four letters removed** | question | orbs | cream, rose | glare | a2 | wave | Andika | all | c1 | slow | still | 33 |
-| 67 | **the tittle** is the name for **the dot over i and j** | label | ribbons | ink, rose | swim | a2 | flip | OpenDyslexic | tint | c1 | medium | still | 22 |
-| 68 | **&** was once taught as the **27th letter** | question | letters | navy, orchid | glare | a1 | flip | Atkinson Hyperlegible | tint | c1 | medium | push | 20 |
-| 69 | **E** is the most used **letter in English** | question | dust | cream, periwinkle | glare | a1 | scatter | Andika | bionic | c4 | medium | drift | 22 |
-| 70 | **the** is the most used **word in English** | question | letters | dusk, periwinkle | faint | a1 | scatter | Lexend | ruler | c3 | slow | drift | 26 |
-| 71 | **run** has more meanings than **any other English verb** | label | dust | cream, apricot | faint | a1 | scatter | Andika | tint | c3 | fast | drift | 17 |
-| 72 | **ye olde** was always said **the olde** | question | orbs | cream, peach | crowd | a2 | scatter | Comic Neue | all | c4 | fast | push | 22 |
-| 73 | **OK** began as **a spelling joke** | question | orbs | cream, butter | glare | a3 | morph | Readex Pro | ruler | c3 | slow | still | 27 |
-| 74 | **dreamt** ends in **mt** | question | letters | ink, rose | glare | a2 | scatter | OpenDyslexic | tint | c1 | slow | push | 24 |
-| 75 | **strengths** has nine letters and **just one vowel** | label | orbs | ink, butter | glare | a2 | sweep | OpenDyslexic | font | c4 | slow | still | 23 |
-| 76 | **pangram** a sentence using **every letter** | question | ribbons | dusk, rose | swim | a4 | scatter | Comic Neue | bionic | c4 | fast | still | 18 |
-| 77 | **palindrome** reads the same **backwards** | label | orbs | ink, rose | glare | a4 | wave | Atkinson Hyperlegible | ruler | c2 | medium | drift | 20 |
-| 78 | **your eyes** do not glide when **you read** | question | orbs | cream, mint | glare | a3 | morph | Lexend | all | c2 | fast | still | 22 |
-| 79 | **one in ten** people are thought to be **dyslexic** | label | dust | navy, apricot | glare | a1 | sweep | OpenDyslexic | font | c1 | medium | push | 19 |
-| 80 | **octothorpe** is another name for **the hash sign** | label | ribbons | ink, periwinkle | crowd | a4 | wave | Readex Pro | all | c4 | slow | push | 31 |
+| 61 | **typewriter** can be typed using only **the top row of keys** | label | ribbons | ink, butter | swim | a3 | wave | Comic Neue | ruler | c1 | slow | still | 31 |
+| 62 | **rhythm** has no **a, e, i, o or u** | question | ribbons | cream, sky | cramped | a1 | wave | Lexend | tint | c3 | slow | still | 32 |
+| 63 | **uncopyrightable** uses fifteen letters and **repeats none** | label | letters | ink, mint | cramped | a2 | sweep | Lexend | tint | c1 | slow | still | 30 |
+| 64 | **almost** has its letters in **alphabetical order** | question | ribbons | navy, orchid | cramped | a2 | sweep | Atkinson Hyperlegible | all | c4 | slow | still | 39 |
+| 65 | **bookkeeper** has three double letters **in a row** | label | orbs | dusk, peach | faint | a1 | scatter | Readex Pro | font | c1 | slow | still | 28 |
+| 66 | **queue** sounds the same with **four letters removed** | question | orbs | cream, rose | glare | a2 | wave | Andika | all | c1 | slow | still | 44 |
+| 67 | **the tittle** is the name for **the dot over i and j** | label | ribbons | ink, rose | swim | a2 | flip | OpenDyslexic | tint | c1 | medium | still | 28 |
+| 68 | **&** was once taught as the **27th letter** | question | letters | navy, orchid | glare | a1 | flip | Atkinson Hyperlegible | tint | c1 | medium | push | 24 |
+| 69 | **E** is the most used **letter in English** | question | dust | cream, periwinkle | glare | a1 | scatter | Andika | bionic | c4 | medium | drift | 28 |
+| 70 | **the** is the most used **word in English** | question | letters | dusk, periwinkle | faint | a1 | scatter | Lexend | ruler | c3 | slow | drift | 33 |
+| 71 | **run** has more meanings than **any other English verb** | label | dust | cream, apricot | faint | a1 | scatter | Andika | tint | c3 | fast | drift | 20 |
+| 72 | **ye olde** was always said **the olde** | question | orbs | cream, peach | crowd | a2 | scatter | Comic Neue | all | c4 | fast | push | 28 |
+| 73 | **OK** began as **a spelling joke** | question | orbs | cream, butter | glare | a3 | morph | Readex Pro | ruler | c3 | slow | still | 34 |
+| 74 | **dreamt** ends in **mt** | question | letters | ink, rose | glare | a2 | scatter | OpenDyslexic | tint | c1 | slow | push | 28 |
+| 75 | **strengths** has nine letters and **just one vowel** | label | orbs | ink, butter | glare | a2 | sweep | OpenDyslexic | font | c4 | slow | still | 28 |
+| 76 | **pangram** a sentence using **every letter** | question | ribbons | dusk, rose | swim | a4 | scatter | Comic Neue | bionic | c4 | fast | still | 22 |
+| 77 | **palindrome** reads the same **backwards** | label | orbs | ink, rose | glare | a4 | wave | Atkinson Hyperlegible | ruler | c2 | medium | drift | 24 |
+| 78 | **your eyes** do not glide when **you read** | question | orbs | cream, mint | glare | a3 | morph | Lexend | all | c2 | fast | still | 28 |
+| 79 | **one in ten** people are thought to be **dyslexic** | label | dust | navy, apricot | glare | a1 | sweep | OpenDyslexic | font | c1 | medium | push | 23 |
+| 80 | **octothorpe** is another name for **the hash sign** | label | ribbons | ink, periwinkle | crowd | a4 | wave | Readex Pro | all | c4 | slow | push | 40 |
 
 ## Phrases, groups, mix-ups and tongue twisters (81-100)
 
 | # | Idea | Hook | Background | Colours | Made hard by | Question | Change | Font | Features | Close | Pace | Camera | Secs |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 81 | **a murmuration** is the word for a flock of **starlings** | question | dust | cream, sky | crowd | a4 | wave | OpenDyslexic | tint | c3 | medium | still | 21 |
-| 82 | **an exaltation** is the word for a flock of **larks** | label | letters | cream, rose | crowd | a2 | scatter | Andika | bionic | c2 | slow | push | 27 |
-| 83 | **a flamboyance** is the word for a group of **flamingos** | question | ribbons | navy, butter | faint | a3 | flip | Readex Pro | bionic | c3 | medium | push | 21 |
-| 84 | **break the ice** first meant **clearing a path for ships** | label | ribbons | dusk, butter | faint | a4 | scatter | Lexend | all | c1 | fast | still | 21 |
-| 85 | **once in a blue moon** means **very rarely** | label | ribbons | cream, apricot | swim | a3 | morph | OpenDyslexic | bionic | c2 | fast | push | 18 |
-| 86 | **spill the beans** means **give away a secret** | question | dust | navy, rose | crowd | a4 | flip | Readex Pro | bionic | c1 | fast | still | 18 |
-| 87 | **under the weather** means **feeling unwell** | question | dust | cream, periwinkle | faint | a1 | morph | Comic Neue | font | c2 | fast | push | 15 |
-| 88 | **bite the bullet** means **face something hard** | question | orbs | dusk, butter | glare | a4 | morph | Comic Neue | bionic | c2 | fast | drift | 18 |
-| 89 | **affect or effect?** affect is usually the verb **effect is the noun** | label | ribbons | dusk, peach | cramped | a1 | morph | Lexend | font | c2 | fast | still | 16 |
-| 90 | **stationary or stationery?** the one with an e is for **envelopes** | question | letters | ink, peach | crowd | a4 | sweep | OpenDyslexic | font | c3 | fast | push | 16 |
-| 91 | **their, there, they’re** three words with **one sound** | label | ribbons | ink, peach | crowd | a1 | sweep | Comic Neue | all | c4 | medium | drift | 26 |
-| 92 | **lose or loose?** lose has **lost an o** | question | dust | cream, orchid | faint | a4 | scatter | Readex Pro | all | c3 | fast | drift | 20 |
-| 93 | **desert or dessert?** dessert has two s because **you want seconds** | question | ribbons | navy, mint | faint | a3 | scatter | OpenDyslexic | all | c4 | medium | push | 25 |
-| 94 | **complement or compliment?** a complement **completes** | question | orbs | ink, orchid | glare | a3 | morph | Lexend | ruler | c3 | fast | push | 18 |
-| 95 | **she sells seashells** now say it **three times fast** | question | ribbons | dusk, apricot | faint | a4 | morph | Lexend | all | c2 | medium | drift | 26 |
-| 96 | **red lorry, yellow lorry** now say it **five times fast** | question | letters | navy, butter | swim | a3 | flip | Readex Pro | all | c1 | fast | push | 21 |
-| 97 | **Peter Piper** picked a peck of **pickled peppers** | label | ribbons | ink, orchid | cramped | a3 | flip | Andika | bionic | c1 | slow | drift | 27 |
-| 98 | **the whole nine yards** means **everything** | label | dust | dusk, periwinkle | crowd | a4 | morph | Readex Pro | ruler | c4 | medium | still | 21 |
-| 99 | **principal or principle?** the principal **is your pal** | question | orbs | cream, orchid | glare | a2 | sweep | Readex Pro | ruler | c1 | medium | drift | 22 |
-| 100 | **onomatopoeia** a word that **sounds like what it means** | question | ribbons | cream, rose | faint | a1 | wave | Lexend | font | c2 | fast | drift | 16 |
+| 81 | **a murmuration** is the word for a flock of **starlings** | question | dust | cream, sky | crowd | a4 | wave | OpenDyslexic | tint | c3 | medium | still | 25 |
+| 82 | **an exaltation** is the word for a flock of **larks** | label | letters | cream, rose | crowd | a2 | scatter | Andika | bionic | c2 | slow | push | 33 |
+| 83 | **a flamboyance** is the word for a group of **flamingos** | question | ribbons | navy, butter | faint | a3 | flip | Readex Pro | bionic | c3 | medium | push | 26 |
+| 84 | **break the ice** first meant **clearing a path for ships** | label | ribbons | dusk, butter | faint | a4 | scatter | Lexend | all | c1 | fast | still | 27 |
+| 85 | **once in a blue moon** means **very rarely** | label | ribbons | cream, apricot | swim | a3 | morph | OpenDyslexic | bionic | c2 | fast | push | 22 |
+| 86 | **spill the beans** means **give away a secret** | question | dust | navy, rose | crowd | a4 | flip | Readex Pro | bionic | c1 | fast | still | 23 |
+| 87 | **under the weather** means **feeling unwell** | question | dust | cream, periwinkle | faint | a1 | morph | Comic Neue | font | c2 | fast | push | 18 |
+| 88 | **bite the bullet** means **face something hard** | question | orbs | dusk, butter | glare | a4 | morph | Comic Neue | bionic | c2 | fast | drift | 21 |
+| 89 | **affect or effect?** affect is usually the verb **effect is the noun** | label | ribbons | dusk, peach | cramped | a1 | morph | Lexend | font | c2 | fast | still | 20 |
+| 90 | **stationary or stationery?** the one with an e is for **envelopes** | question | letters | ink, peach | crowd | a4 | sweep | OpenDyslexic | font | c3 | fast | push | 18 |
+| 91 | **their, there, they’re** three words with **one sound** | label | ribbons | ink, peach | crowd | a1 | sweep | Comic Neue | all | c4 | medium | drift | 34 |
+| 92 | **lose or loose?** lose has **lost an o** | question | dust | cream, orchid | faint | a4 | scatter | Readex Pro | all | c3 | fast | drift | 25 |
+| 93 | **desert or dessert?** dessert has two s because **you want seconds** | question | ribbons | navy, mint | faint | a3 | scatter | OpenDyslexic | all | c4 | medium | push | 32 |
+| 94 | **complement or compliment?** a complement **completes** | question | orbs | ink, orchid | glare | a3 | morph | Lexend | ruler | c3 | fast | push | 21 |
+| 95 | **she sells seashells** now say it **three times fast** | question | ribbons | dusk, apricot | faint | a4 | morph | Lexend | all | c2 | medium | drift | 33 |
+| 96 | **red lorry, yellow lorry** now say it **five times fast** | question | letters | navy, butter | swim | a3 | flip | Readex Pro | all | c1 | fast | push | 27 |
+| 97 | **Peter Piper** picked a peck of **pickled peppers** | label | ribbons | ink, orchid | cramped | a3 | flip | Andika | bionic | c1 | slow | drift | 34 |
+| 98 | **the whole nine yards** means **everything** | label | dust | dusk, periwinkle | crowd | a4 | morph | Readex Pro | ruler | c4 | medium | still | 25 |
+| 99 | **principal or principle?** the principal **is your pal** | question | orbs | cream, orchid | glare | a2 | sweep | Readex Pro | ruler | c1 | medium | drift | 27 |
+| 100 | **onomatopoeia** a word that **sounds like what it means** | question | ribbons | cream, rose | faint | a1 | wave | Lexend | font | c2 | fast | drift | 20 |
 
 ## Lessons
 

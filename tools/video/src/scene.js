@@ -357,8 +357,48 @@ export function createPlayer(THREE, canvas, variant, opts = {}) {
       });
       return (t, fade) => { for (const r of rs) { r.m.uniforms.t.value = t; r.m.uniforms.a.value = r.a * fade * (dark ? 0.9 : 1); } };
     },
+    /** Petrichor: thin rain falling on dry ground, with slow rings where the drops land and a warm glow from the earth. */
+    rain() {
+      const n = 240, pos = new Float32Array(n * 12), prm = new Float32Array(n * 16), cor = new Float32Array(n * 8), idx = [];
+      const RANGE = H * 2.4;
+      for (let i = 0; i < n; i++) {
+        const x = (R() - 0.5) * W * 3.4, y = R() * RANGE, z = -200 - R() * 2000, sp = 520 + R() * 520, len = 70 + R() * 150, wd = 2 + R() * 2.5, sd = R();
+        [[-0.5, 0], [0.5, 0], [0.5, 1], [-0.5, 1]].forEach(([cx, cy], k) => { pos.set([x, y, z], i * 12 + k * 3); prm.set([sp, len, wd, sd], i * 16 + k * 4); cor.set([cx, cy], i * 8 + k * 2); });
+        idx.push(i * 4, i * 4 + 1, i * 4 + 2, i * 4, i * 4 + 2, i * 4 + 3);
+      }
+      const g = new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('prm', new THREE.BufferAttribute(prm, 4)); g.setAttribute('cor', new THREE.BufferAttribute(cor, 2)); g.setIndex(idx);
+      const streaks = new THREE.ShaderMaterial({ transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide, blending: glowBlend,
+        uniforms: { t: { value: 0 }, a: { value: 0 }, c: { value: v3(mix3(pastel, dark ? col.text : col.deep, 0.35)) }, range: { value: RANGE } },
+        vertexShader: 'attribute vec4 prm; attribute vec2 cor; uniform float t; uniform float range; varying float along; varying float tw; void main(){ vec3 p = position;' +
+          ' float y = mod(p.y - t * prm.x + prm.w * range, range) - range * 0.5; float lean = -0.14;' +
+          ' vec3 q = vec3(p.x + y * lean + cor.x * prm.z + cor.y * prm.y * lean, y + cor.y * prm.y, p.z); along = cor.y; tw = 0.45 + 0.55 * prm.w; gl_Position = projectionMatrix * modelViewMatrix * vec4(q, 1.0); }',
+        fragmentShader: 'uniform vec3 c; uniform float a; varying float along; varying float tw; void main(){ float f = (1.0 - along); gl_FragColor = vec4(c, a * tw * f * f); }' });
+      const rainMesh = new THREE.Mesh(g, streaks); rainMesh.frustumCulled = false; rainMesh.renderOrder = 2; scene.add(rainMesh);
+      // the ground: a plane tipped away from the camera, with rings that spread and fade
+      const ground = new THREE.ShaderMaterial({ transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide, blending: glowBlend,
+        uniforms: { t: { value: 0 }, a: { value: 0 }, c: { value: v3(mix3(pastel, dark ? col.text : col.deep, 0.2)) }, asp: { value: 2.2 } },
+        vertexShader: VS,
+        fragmentShader: 'uniform vec3 c; uniform float a; uniform float t; uniform float asp; varying vec2 vUv; float h(float x){ return fract(sin(x * 91.3458) * 47453.5453); }' +
+          ' void main(){ vec2 q = vUv * vec2(asp, 1.0) * 7.0; float acc = 0.0;' +
+          ' for (int i = 0; i < 18; i++) { float fi = float(i); float period = 2.6 + h(fi + 0.5) * 2.4; float ph = t / period + h(fi + 7.0); float n = floor(ph); float age = fract(ph);' +
+          '  vec2 ctr = vec2(h(fi * 3.1 + n * 1.7 + 0.3), 0.08 + 0.84 * h(fi * 5.3 + n * 2.9 + 0.7)) * vec2(asp, 1.0) * 7.0; float d = distance(q, ctr); float r = 0.08 + age * 0.75;' +
+          '  float fade = (1.0 - age) * (1.0 - age) * smoothstep(0.0, 0.08, age); acc += (smoothstep(0.05, 0.0, abs(d - r)) + 0.5 * smoothstep(0.04, 0.0, abs(d - r * 0.55))) * fade; }' +
+          ' float edge = smoothstep(0.0, 0.25, vUv.y) * smoothstep(1.0, 0.55, vUv.y) * smoothstep(0.0, 0.2, vUv.x) * smoothstep(1.0, 0.8, vUv.x); gl_FragColor = vec4(c, a * acc * edge); }' });
+      disposables.push(g, streaks, ground);
+      const plane = new THREE.Mesh(quad, ground); plane.renderOrder = 1; plane.scale.set(W * 4.4, W * 2.0, 1); plane.rotation.x = -1.2; plane.position.set(0, -H * 0.33, -520); scene.add(plane);
+      // warm earth below, cool sky above
+      const glow = (tone, x, y, r, a) => { const m = new THREE.Mesh(quad, material('uniform vec3 c; uniform float a; varying vec2 vUv; void main(){ float d = length(vUv - 0.5) * 2.0; float g = smoothstep(1.0, 0.0, d); gl_FragColor = vec4(c, a * g * g); }', { c: { value: v3(tone) }, a: { value: 0 } }, glowBlend)); m.renderOrder = 0; m.position.set(x, y, -900); m.scale.set(r * 2, r * 2, 1); scene.add(m); return { m, a }; };
+      const glows = [glow(mix3(pastel, [0.86, 0.52, 0.32], 0.7), 0, -H * 0.62, H * 0.75, dark ? 0.22 : 0.4), glow(mix3(pastel, col.bg, 0.3), W * 0.2, H * 0.6, H * 0.6, dark ? 0.12 : 0.3)];
+      return (t, fade) => {
+        streaks.uniforms.t.value = t; streaks.uniforms.a.value = (dark ? 0.2 : 0.3) * fade;
+        ground.uniforms.t.value = t; ground.uniforms.a.value = (dark ? 0.2 : 0.3) * fade;
+        glows[0].m.material.uniforms.a.value = glows[0].a * fade * (0.9 + 0.1 * Math.sin(t * 0.5)); glows[1].m.material.uniforms.a.value = glows[1].a * fade;
+      };
+    },
   };
-  const updateBackground = backgrounds[P.scene]();
+  // a background made for this idea wins over the one dealt by the experiment
+  const updateBackground = backgrounds[C.motif ?? P.scene]();
 
   // ------------------------------------------------------------------------------------------------- one frame
   const revealLen = Math.min(1.9, (t4 - t3) * 0.62);

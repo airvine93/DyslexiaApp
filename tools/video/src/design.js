@@ -114,7 +114,7 @@ export function buildVariants() {
     const id = `ER-${pad(i + 1)}`;
     const tag = `${id}_${Object.keys(DIMENSIONS).map((d) => DIMENSIONS[d][params[d]]).join('-')}`;
     const kicker = params.hook === 'label' && idea.k ? idea.k : KICKERS[idea.t][params.hook];
-    return { id, n: i + 1, tag, slug: `${id.toLowerCase()}-${slugify(idea.h)}`, params, seed: 1000 + i, content: { kicker, head: idea.h, sub: idea.s, tail: idea.e ?? '', body: idea.b, quoteChecked: idea.t === 'quote' ? !!idea.v : undefined } };
+    return { id, n: i + 1, tag, slug: `${id.toLowerCase()}-${slugify(idea.h)}`, params, seed: 1000 + i, content: { kicker, head: idea.h, sub: idea.s, tail: idea.e ?? '', body: idea.b, motif: idea.m, quoteChecked: idea.t === 'quote' ? !!idea.v : undefined } };
   });
 }
 
@@ -139,8 +139,9 @@ export function timeline(variant) {
   const hook = (variant.params.type === 'quote' ? 3.6 : 3.2) * p;
   const teach = Math.max(4.2, 1.6 + words * 0.19) * p;
   const hard = 3.6 * p;
-  const font = 3.0 * p;
-  const stage = 2.2 * p;
+  // the restyled text stays long enough to be read again in full, then each added feature gets its own beat
+  const font = Math.max(5, 1.6 + words * 0.22) * p;
+  const stage = 3.4 * p;
   const stages = stagesFor(variant.params.feat);
   const t1 = hook, t2 = t1 + teach, t3 = t2 + hard, t4 = t3 + font;
   const stageTimes = stages.map((name, k) => ({ name, start: t4 + k * stage, end: t4 + (k + 1) * stage }));
