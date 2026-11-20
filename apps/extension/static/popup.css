@@ -19,3 +19,11 @@ select { font: inherit; color: inherit; background: var(--bg); border: 1px solid
 button.step { font: inherit; font-size: 18px; width: 32px; height: 32px; flex: none; cursor: pointer; border: 1px solid var(--line); background: none; color: inherit; border-radius: 8px; }
 button.step:disabled { opacity: .4; cursor: default; }
 
+button.primary, #code-copy, #code-form button { font: inherit; cursor: pointer; border-radius: 8px; padding: 6px 10px; border: 1px solid var(--accent); }
+button.primary { background: var(--accent); color: var(--bg); width: 100%; margin: 8px 0 4px; }
+#code-copy, #code-form button { background: none; color: inherit; border-color: var(--line); }
+.hint, .note { color: var(--muted); font-size: 12px; margin: 0 0 6px; }
+.note { color: inherit; background: color-mix(in srgb, var(--accent) 12%, transparent); padding: 6px 8px; border-radius: 6px; }
+#code-form input { flex: 1; min-width: 0; font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; }
+summary { cursor: pointer; }
+details[open] { display: grid; gap: 6px; }

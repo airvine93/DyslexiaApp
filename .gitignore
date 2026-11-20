@@ -5,3 +5,4 @@ target/
 .DS_Store
 apps/reader/src-tauri/gen/
 dist-single/
+apps/reader/public/ocr/

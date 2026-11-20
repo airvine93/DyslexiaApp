@@ -1,5 +1,5 @@
-import { bionicLabel, stepBold, BIONIC_MARKS, BIONIC_MAX, BIONIC_MIN, FONTS, TINT_PRESETS, type Settings } from '@dr/core';
-import { load, save, type State } from './store';
+import { bionicLabel, readSettingsCode, settingsCode, stepBold, BIONIC_MARKS, BIONIC_MAX, BIONIC_MIN, FONTS, TINT_PRESETS, type Settings } from '@dr/core';
+import { load, save, PICTURE_TEXT_SITES, type State } from './store';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const el = {
@@ -9,7 +9,11 @@ const el = {
   tintOn: $<HTMLInputElement>('tint-on'), swatches: $('swatches'), tintColour: $<HTMLInputElement>('tint-colour'),
   tintStrength: $<HTMLInputElement>('tint-strength'), tintOut: $<HTMLOutputElement>('tint-out'),
   spacing: $<HTMLInputElement>('spacing'), spacingOut: $<HTMLOutputElement>('spacing-out'),
+  zoom: $<HTMLInputElement>('zoom'), zoomOut: $<HTMLOutputElement>('zoom-out'), lineOn: $<HTMLInputElement>('line-on'),
+  line: $<HTMLInputElement>('line'), lineOut: $<HTMLOutputElement>('line-out'), siteNote: $('site-note'),
 };
+let tabId: number | undefined;
+let tabUrl = '';
 
 let state: State;
 let host = '';
@@ -26,10 +30,27 @@ function render(): void {
   el.tintOn.checked = s.tint.on; el.tintColour.value = s.tint.colour;
   el.tintStrength.value = String(s.tint.strength); el.tintOut.value = `${s.tint.strength}%`;
   el.spacing.value = String(s.letterSpacing); el.spacingOut.value = s.letterSpacing ? `+${s.letterSpacing}` : 'Normal';
+  el.zoom.value = String(state.zoom); el.zoomOut.value = `${state.zoom}%`;
+  el.lineOn.checked = state.lineOn; el.line.value = String(s.lineHeight); el.lineOut.value = state.lineOn ? s.lineHeight.toFixed(1) : 'As the site has it';
   for (const b of el.swatches.querySelectorAll<HTMLButtonElement>('button')) b.setAttribute('aria-checked', String(b.dataset.colour === s.tint.colour));
 }
 
 let timer = 0;
+let laterTimer = 0;
+const later = (run: () => void) => { clearTimeout(laterTimer); laterTimer = window.setTimeout(run, 150); };
+
+/** Hand this page (or a PDF's address) to the reader page built into the extension, and open it in a new tab. */
+async function openReader(): Promise<void> {
+  let pending: { html?: string; title?: string; pdfUrl?: string } | null = null;
+  if (/\.pdf($|[?#])/i.test(tabUrl) && /^(https?|file):/.test(tabUrl)) {
+    pending = { pdfUrl: tabUrl, title: decodeURIComponent(tabUrl.split(/[?#]/)[0]!.split('/').pop() || 'document.pdf') };
+  } else if (tabId !== undefined) {
+    pending = await chrome.tabs.sendMessage(tabId, { type: 'er-get-page' }).catch(() => null);
+  }
+  if (pending) await chrome.storage.local.set({ pending });
+  await chrome.tabs.create({ url: chrome.runtime.getURL('reader/index.html') });
+  window.close();
+}
 function set(change: (s: Settings) => Settings): void {
   state.settings = change(state.settings);
   render();
@@ -42,7 +63,14 @@ async function start(): Promise<void> {
   state = await load();
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   try { host = tab?.url ? new URL(tab.url).hostname : ''; } catch { host = ''; }
+  tabId = tab?.id; tabUrl = tab?.url ?? '';
   el.host.textContent = host || 'this page';
+  const picture = PICTURE_TEXT_SITES.find((p) => p.test.test(host));
+  const isPdf = /\.pdf($|[?#])/i.test(tabUrl);
+  if (picture || isPdf) {
+    el.siteNote.hidden = false;
+    el.siteNote.textContent = isPdf ? 'This is a PDF, which can\u2019t be restyled in the browser. Press Open in Easy Reader to read it there.' : picture!.tip;
+  }
 
   for (const m of BIONIC_MARKS) {
     const b = document.createElement('button'); b.type = 'button'; b.textContent = m.label;
@@ -71,6 +99,23 @@ async function start(): Promise<void> {
   el.tintColour.addEventListener('input', () => set((s) => ({ ...s, tint: { ...s.tint, on: true, colour: el.tintColour.value } })));
   el.tintStrength.addEventListener('input', () => set((s) => ({ ...s, tint: { ...s.tint, strength: Number(el.tintStrength.value) } })));
   el.spacing.addEventListener('input', () => set((s) => ({ ...s, letterSpacing: Number(el.spacing.value) })));
+  el.zoom.addEventListener('input', () => { state.zoom = Number(el.zoom.value); render(); later(() => save({ zoom: state.zoom })); });
+  el.lineOn.addEventListener('change', () => { state.lineOn = el.lineOn.checked; render(); void save({ lineOn: state.lineOn }); });
+  el.line.addEventListener('input', () => { state.lineOn = true; void save({ lineOn: true }); set((s) => ({ ...s, lineHeight: Number(el.line.value) })); });
+  $('open-reader').addEventListener('click', () => void openReader());
+  $<HTMLFormElement>('code-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const s = readSettingsCode($<HTMLInputElement>('code-in').value);
+    const input = $<HTMLInputElement>('code-in');
+    if (!s) { input.value = ''; input.placeholder = 'That code didn\u2019t work. Try copying it again.'; return; }
+    input.value = ''; input.placeholder = 'Settings brought in';
+    set(() => s);
+  });
+  $('code-copy').addEventListener('click', async () => {
+    const code = settingsCode(state.settings);
+    const input = $<HTMLInputElement>('code-in');
+    try { await navigator.clipboard.writeText(code); input.placeholder = 'Code copied'; } catch { input.value = code; input.select(); }
+  });
   render();
 }
 void start();

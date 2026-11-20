@@ -10,9 +10,13 @@ const SKIP = new Set([
   'SVG', 'MATH', 'CANVAS', 'IFRAME', 'TEMPLATE', 'HEAD', 'TITLE',
 ]);
 
+/** Parts of web apps where people type or that scripts manage closely: changing their words can upset the app. */
+const SKIP_ROLES = new Set(['textbox', 'combobox', 'searchbox', 'application', 'code']);
+const skipRole = (el: Element) => SKIP_ROLES.has((el.getAttribute('role') ?? '').toLowerCase());
+
 function skippable(el: Element | null): boolean {
   for (let e = el; e; e = e.parentElement) {
-    if (SKIP.has(e.tagName.toUpperCase())) return true;
+    if (SKIP.has(e.tagName.toUpperCase()) || skipRole(e)) return true;
     if (e.classList.contains(WRAP)) return true;
     if (e instanceof HTMLElement && (e.isContentEditable || e.getAttribute('contenteditable') === 'true')) return true;
     if (e.getAttribute('aria-hidden') === 'true' && e.childElementCount === 0) return true;
@@ -32,7 +36,7 @@ function textNodes(root: Node): Text[] {
     acceptNode(n) {
       if (n.nodeType === Node.ELEMENT_NODE) {
         const el = n as Element;
-        return SKIP.has(el.tagName.toUpperCase()) || el.classList.contains(WRAP) || el.hasAttribute('data-dr-skip')
+        return SKIP.has(el.tagName.toUpperCase()) || skipRole(el) || el.classList.contains(WRAP) || el.hasAttribute('data-dr-skip')
           || (el instanceof HTMLElement && el.isContentEditable) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_SKIP;
       }
       return /\p{L}/u.test(n.nodeValue ?? '') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
