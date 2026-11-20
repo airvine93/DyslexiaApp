@@ -17,6 +17,6 @@ export default defineConfig(({ mode }) => mode === 'single'
     envPrefix: ['VITE_', 'TAURI_ENV_'],
     build: {
       target: 'es2022',
-      rollupOptions: { input: { main: resolve(__dirname, 'index.html'), overlay: resolve(__dirname, 'overlay.html') } },
+      rollupOptions: { input: { main: resolve(import.meta.dirname, 'index.html'), overlay: resolve(import.meta.dirname, 'overlay.html') } },
     },
   });

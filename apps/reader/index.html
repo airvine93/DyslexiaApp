@@ -8,14 +8,29 @@
 </head>
 <body>
   <header class="bar">
-    <h1 class="brand">Easy Reader</h1>
-    <div class="actions">
-      <button id="paste" type="button" title="Read what you copied">Paste</button>
-      <label class="button" title="Open a text, Markdown, web page or PDF file">Open file
-        <input id="file" type="file" accept=".txt,.md,.markdown,.html,.htm,.pdf,text/plain,text/html,application/pdf" hidden />
-      </label>
-      <button id="edit" type="button">Type</button>
-      <button id="toggle-panel" type="button" aria-expanded="false" aria-controls="panel">Settings</button>
+    <div class="top">
+      <h1 class="brand">Easy Reader</h1>
+      <div class="actions">
+        <div class="menu-wrap">
+          <button id="open-menu" type="button" aria-expanded="false" aria-controls="open-list" aria-haspopup="true">Open <span aria-hidden="true">▾</span></button>
+          <div id="open-list" class="menu" hidden>
+            <button id="paste" type="button">Paste what I copied</button>
+            <label class="button" id="file-label">Open a file
+              <input id="file" type="file" hidden />
+            </label>
+            <label class="button">Photo of some text
+              <input id="photo" type="file" accept="image/*" capture="environment" hidden />
+            </label>
+            <button id="edit" type="button">Type or paste text</button>
+            <div id="recent" class="recent" hidden>
+              <h2>Recent</h2>
+              <ul id="recent-list"></ul>
+            </div>
+          </div>
+        </div>
+        <button id="say" type="button" class="say" hidden aria-label="Read aloud" title="Read aloud"><span aria-hidden="true">▶</span> <span class="say-label">Read aloud</span></button>
+        <button id="toggle-panel" type="button" aria-expanded="false" aria-controls="panel">Settings</button>
+      </div>
     </div>
     <div class="quick" role="toolbar" aria-label="Quick reading controls">
       <div class="group">
@@ -25,15 +40,26 @@
       <div class="group">
         <button id="q-bold-on" type="button" class="toggle" aria-pressed="true">Bold</button>
         <button id="q-less" type="button" class="step" aria-label="Less bold" title="Less bold">−</button>
-        <input id="q-bold" type="range" min="5" max="80" step="1" aria-label="How much of each word is bold" />
+        <input id="q-bold" type="range" min="5" max="80" step="1" aria-label="How much of each word is bold" class="wide-only" />
         <button id="q-more" type="button" class="step" aria-label="More bold" title="More bold">+</button>
-        <output id="q-bold-out" for="q-bold"></output>
+        <output id="q-bold-out" for="q-bold" class="wide-only"></output>
+      </div>
+      <div class="group wide-only">
+        <button id="q-ruler" type="button" class="toggle" aria-pressed="false">Ruler</button>
       </div>
     </div>
   </header>
 
+  <div id="player" class="player" hidden role="group" aria-label="Reading aloud">
+    <button id="p-back" type="button" aria-label="Previous sentence" title="Previous sentence">⏮</button>
+    <button id="p-play" type="button" aria-label="Pause" title="Pause">⏸</button>
+    <button id="p-next" type="button" aria-label="Next sentence" title="Next sentence">⏭</button>
+    <label class="speed">Speed <select id="p-rate" aria-label="Reading speed"></select></label>
+    <button id="p-stop" type="button">Stop</button>
+  </div>
+
   <main id="main">
-    <article id="page" class="page" aria-live="polite"></article>
+    <article id="page" class="page"></article>
     <form id="editor" class="page editor" hidden>
       <label for="editor-text">Paste or type the text you want to read</label>
       <textarea id="editor-text" rows="12"></textarea>
@@ -45,6 +71,11 @@
     <div class="panel-head"><h2>Reading settings</h2><button id="close-panel" type="button" aria-label="Close settings">Done</button></div>
 
     <section>
+      <button id="setup" type="button" class="primary">Help me choose</button>
+      <p class="hint">Shows a few ways the text can look so you can pick what feels easiest.</p>
+    </section>
+
+    <section>
       <label class="switch"><input id="font-on" type="checkbox" /> <span id="font-heading">Use a reading font</span></label>
       <div class="fonts" id="fonts" role="radiogroup" aria-labelledby="font-heading"></div>
     </section>
@@ -54,6 +85,12 @@
       <input id="bionic" type="range" min="5" max="80" step="1" list="bionic-marks" aria-label="How much of each word is bold" />
       <datalist id="bionic-marks"></datalist>
       <div class="marks" id="bionic-mark-labels"></div>
+    </section>
+
+    <section>
+      <h3 id="theme-heading">Page colour</h3>
+      <div class="themes" id="themes" role="radiogroup" aria-labelledby="theme-heading"></div>
+      <label class="switch"><input id="no-italics" type="checkbox" /> <span>Show slanted (italic) words upright and bold</span></label>
     </section>
 
     <section>
@@ -73,12 +110,45 @@
       <input id="line" type="range" min="1" max="3" step="0.1" />
       <div class="label-row"><label for="spacing">Letter spacing</label><output id="spacing-out"></output></div>
       <input id="spacing" type="range" min="0" max="30" step="1" />
+      <div class="label-row"><label for="width">Line length</label><output id="width-out"></output></div>
+      <input id="width" type="range" min="30" max="100" step="2" />
+    </section>
+
+    <section>
+      <label class="switch"><input id="ruler-on" type="checkbox" /> <span>Reading ruler</span></label>
+      <p class="hint">Highlights the line you are on and dims the rest. It follows your mouse or finger, and the up and down arrow keys move the text under it.</p>
+      <div class="label-row"><label for="ruler-lines">Lines shown</label><output id="ruler-lines-out"></output></div>
+      <input id="ruler-lines" type="range" min="1" max="5" step="1" />
+    </section>
+
+    <section id="speech-section">
+      <h3>Read aloud</h3>
+      <p class="hint" id="speech-hint"></p>
+      <div class="label-row"><label for="voice">Voice</label><select id="voice"></select></div>
+      <div class="label-row"><label for="rate">Speed</label><output id="rate-out"></output></div>
+      <input id="rate" type="range" min="0.5" max="2" step="0.1" />
+      <label class="switch"><input id="word-help" type="checkbox" /> <span>Tap a word to hear it and see it in parts</span></label>
+    </section>
+
+    <section>
+      <h3>Saved setups</h3>
+      <p class="hint">Keep a few setups, such as "Work" or "Tired evening", and switch between them in one tap.</p>
+      <ul class="setups" id="setups"></ul>
+      <form class="row" id="setup-save"><input id="setup-name" type="text" maxlength="40" placeholder="Name this setup" aria-label="Name for this setup" /><button type="submit">Save</button></form>
+    </section>
+
+    <section>
+      <h3>Use these settings somewhere else</h3>
+      <p class="hint">Copy a code here and paste it into Easy Reader on another device, or into the browser extension.</p>
+      <div class="row"><button id="code-copy" type="button">Copy my settings code</button></div>
+      <form class="row" id="code-form"><input id="code-in" type="text" placeholder="Paste a settings code" aria-label="Settings code" /><button type="submit">Use code</button></form>
     </section>
 
     <section><button id="reset" type="button">Reset to defaults</button></section>
   </aside>
 
   <div id="tint" aria-hidden="true"></div>
+  <div id="status" class="visually-hidden" role="status" aria-live="polite"></div>
   <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
