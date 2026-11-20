@@ -33,7 +33,7 @@ The type follows the idea. Every other setting is dealt out evenly and shuffled,
 | 3 | **mellifluous** a sound that **flows like honey** | label | letters | ink, orchid | crowd | a3 | sweep | Andika | ruler | c2 | slow | push | 37 |
 | 4 | **ephemeral** lasting only **a very short time** | label | letters | navy, sky | swim | a3 | wave | Comic Neue | ruler | c4 | medium | drift | 30 |
 | 5 | **defenestrate** to throw someone **out of a window** | label | orbs | cream, peach | crowd | a3 | wave | Lexend | ruler | c3 | slow | push | 37 |
-| 6 | **apricity** the warmth of **the sun in winter** | question | orbs | dusk, sky | cramped | a1 | flip | Andika | font | c4 | medium | drift | 28 |
+| 6 | **apricity** the warmth of **the sun in winter** | question | orbs | dusk, sky | cramped | a1 | flip | Andika | font | c4 | medium | drift | 27 |
 | 7 | **susurrus** a soft **whispering sound** | label | ribbons | cream, rose | cramped | a4 | wave | OpenDyslexic | ruler | c4 | medium | still | 31 |
 | 8 | **halcyon** calm, happy **and peaceful** | label | dust | dusk, periwinkle | cramped | a4 | flip | Lexend | ruler | c3 | slow | drift | 38 |
 | 9 | **ineffable** too great **for words** | label | ribbons | cream, periwinkle | glare | a1 | morph | Atkinson Hyperlegible | bionic | c4 | fast | still | 25 |
@@ -158,7 +158,7 @@ The paragraph each video teaches, which is also the text that turns hard to read
 3. **mellifluous** Describes a sound that is sweet, smooth and pleasant to hear, flowing without a rough edge. It is used mostly for voices, music and speech, and often as praise for a singer.
 4. **ephemeral** Lasting for a very short time, and often more precious because of it. A mayfly, a rainbow, cherry blossom and a message that vanishes after reading are all ephemeral. The opposite is permanent.
 5. **defenestrate** To throw someone or something out of a window. It is mostly said with a wink now, and also means removing someone from power suddenly, as when a party defenestrates its leader.
-6. **apricity** The warmth of the sun on a cold winter day, felt on your skin while the air around you stays sharp. It names a small pleasure, which is why people who learn it keep it.
+6. **apricity** The warmth of the sun on a cold winter day, felt on your skin while the air stays sharp. It names a small pleasure, which is why people who learn it keep it.
 7. **susurrus** A soft, continuous whispering, murmuring or rustling sound. Think of wind moving through dry leaves, a quiet tide on sand, or low voices in the next room. The word itself sounds like what it describes.
 8. **halcyon** Calm, happy and untroubled, always said of a time in the past. Halcyon days are a golden stretch you remember fondly, such as a long childhood summer, often with a sense that it cannot return.
 9. **ineffable** Too great, too intense or too sacred to be put into words. People reach for it when describing awe, grief, love or beauty, at the exact moment when ordinary language stops being enough.
