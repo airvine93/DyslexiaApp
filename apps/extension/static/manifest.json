@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Easy Reader for the web",
+  "version": "0.1.0",
+  "description": "Read any web page in OpenDyslexic, with the start of each word in bold and a colour overlay of your choice.",
+  "icons": { "16": "icon-16.png", "32": "icon-32.png", "48": "icon-48.png", "128": "icon-128.png" },
+  "permissions": ["storage"],
+  "action": { "default_popup": "popup.html", "default_title": "Easy Reader" },
+  "content_scripts": [
+    { "matches": ["<all_urls>"], "js": ["content.js"], "run_at": "document_idle", "all_frames": false }
+  ],
+  "web_accessible_resources": [
+    { "resources": ["fonts/*", "fonts/*/*"], "matches": ["<all_urls>"] }
+  ],
+  "browser_specific_settings": { "gecko": { "id": "easy-reader@easyreader.app", "strict_min_version": "121.0" } }
+}

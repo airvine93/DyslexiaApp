@@ -1,0 +1,24 @@
+{
+  "name": "dyslexia-reader",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "npm -w @dr/core test",
+    "typecheck": "tsc -p packages/core && tsc -p apps/reader && tsc -p apps/extension",
+    "dev": "npm -w @dr/reader run dev",
+    "build": "npm -w @dr/reader run build && npm -w @dr/extension run build",
+    "build:reader": "npm -w @dr/reader run build",
+    "build:extension": "npm -w @dr/extension run build",
+    "desktop": "npm -w @dr/reader run tauri dev"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "jsdom": "^27.0.0",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.0",
+    "vitest": "^5.0.0"
+  }
+}

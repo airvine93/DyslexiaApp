@@ -1,0 +1,9 @@
+{
+  "name": "@dr/extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node build.mjs" },
+  "dependencies": { "@dr/core": "*" },
+  "devDependencies": { "esbuild": "^0.28.0", "@types/chrome": "^0.1.0" }
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "What the reader window and the screen-tint windows may do",
+  "windows": ["main", "tint-*"],
+  "permissions": ["core:default"]
+}
