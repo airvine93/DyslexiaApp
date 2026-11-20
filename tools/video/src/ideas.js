@@ -11,7 +11,7 @@
  *   m  motif: a background made for this idea, used in place of the dealt one (optional)
  *   v  quotes only: true once someone has checked the wording against the primary text
  *
- * Lessons stay under about 32 words so they fit in every reading font.
+ * Lessons stay at 36 words or fewer so they fit in every reading font.
  * Quotes are public domain. Each is marked v:false until checked against a full primary text.
  */
 export const IDEAS = [

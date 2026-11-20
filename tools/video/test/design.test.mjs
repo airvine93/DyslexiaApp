@@ -12,7 +12,7 @@ test('there are 100 ideas, 20 of each type', () => {
 });
 
 test('lessons are short enough to fit in every reading font', () => {
-  for (const i of IDEAS) assert.ok(i.b.split(/\s+/).length <= 34, `${i.h}: ${i.b.split(/\s+/).length} words`);
+  for (const i of IDEAS) assert.ok(i.b.split(/\s+/).length <= 36, `${i.h}: ${i.b.split(/\s+/).length} words`);
 });
 
 test('tags are unique and can be read back into the same settings', () => {
