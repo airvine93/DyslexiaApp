@@ -28,26 +28,26 @@ The type follows the idea. Every other setting is dealt out evenly and shuffled,
 
 | # | Idea | Hook | Background | Colours | Made hard by | Question | Change | Font | Features | Close | Pace | Camera | Secs |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | **petrichor** the smell of **rain on dry earth** | label | dust | dusk, sky | faint | a2 | scatter | Readex Pro | font | c4 | fast | still | 21 |
-| 2 | **serendipity** a happy **accident** | label | dust | ink, mint | swim | a4 | morph | Comic Neue | font | c3 | fast | push | 21 |
-| 3 | **mellifluous** a sound that **flows like honey** | label | letters | ink, orchid | crowd | a3 | sweep | Andika | ruler | c2 | slow | push | 33 |
-| 4 | **ephemeral** lasting only **a very short time** | label | letters | navy, sky | swim | a3 | wave | Comic Neue | ruler | c4 | medium | drift | 28 |
-| 5 | **defenestrate** to throw someone **out of a window** | label | orbs | cream, peach | crowd | a3 | wave | Lexend | ruler | c3 | slow | push | 35 |
-| 6 | **apricity** the warmth of **the sun in winter** | question | orbs | dusk, sky | cramped | a1 | flip | Andika | font | c4 | medium | drift | 26 |
-| 7 | **susurrus** a soft **whispering sound** | label | ribbons | cream, rose | cramped | a4 | wave | OpenDyslexic | ruler | c4 | medium | still | 28 |
-| 8 | **halcyon** calm, happy **and peaceful** | label | dust | dusk, periwinkle | cramped | a4 | flip | Lexend | ruler | c3 | slow | drift | 35 |
-| 9 | **ineffable** too great **for words** | label | ribbons | cream, periwinkle | glare | a1 | morph | Atkinson Hyperlegible | bionic | c4 | fast | still | 24 |
-| 10 | **overmorrow** the day **after tomorrow** | label | dust | cream, peach | cramped | a4 | wave | Andika | tint | c2 | medium | push | 27 |
-| 11 | **tsundoku** buying books and **letting them pile up** | question | dust | cream, mint | glare | a3 | scatter | Comic Neue | all | c2 | fast | push | 28 |
-| 12 | **komorebi** sunlight through **the leaves of trees** | question | orbs | ink, mint | faint | a1 | morph | Lexend | tint | c4 | fast | still | 22 |
-| 13 | **saudade** a deep longing for **something absent** | question | dust | cream, mint | crowd | a3 | flip | Andika | bionic | c4 | slow | push | 34 |
-| 14 | **hygge** cosy and **content together** | label | orbs | navy, sky | swim | a1 | scatter | Atkinson Hyperlegible | tint | c3 | slow | drift | 33 |
-| 15 | **sonorous** deep, full **and rich in sound** | label | dust | dusk, mint | cramped | a2 | sweep | Atkinson Hyperlegible | bionic | c1 | medium | drift | 27 |
-| 16 | **lethologica** when you cannot **find the word** | label | dust | dusk, sky | faint | a3 | scatter | OpenDyslexic | font | c1 | medium | drift | 24 |
-| 17 | **quixotic** noble, hopeful **and wildly unrealistic** | label | letters | ink, butter | crowd | a2 | flip | Atkinson Hyperlegible | ruler | c2 | fast | drift | 21 |
-| 18 | **sesquipedalian** a lover of **very long words** | question | ribbons | dusk, rose | glare | a4 | sweep | OpenDyslexic | all | c4 | slow | still | 43 |
-| 19 | **eloquent** speaking **clearly and well** | question | orbs | navy, apricot | swim | a4 | sweep | Andika | tint | c3 | medium | push | 27 |
-| 20 | **luminous** full of **light** | question | ribbons | dusk, apricot | faint | a4 | flip | Readex Pro | font | c1 | slow | still | 28 |
+| 1 | **petrichor** the smell of **rain on dry earth** | label | dust | dusk, sky | faint | a2 | scatter | Readex Pro | font | c4 | fast | still | 22 |
+| 2 | **serendipity** a happy **accident** | label | dust | ink, mint | swim | a4 | morph | Comic Neue | font | c3 | fast | push | 22 |
+| 3 | **mellifluous** a sound that **flows like honey** | label | letters | ink, orchid | crowd | a3 | sweep | Andika | ruler | c2 | slow | push | 37 |
+| 4 | **ephemeral** lasting only **a very short time** | label | letters | navy, sky | swim | a3 | wave | Comic Neue | ruler | c4 | medium | drift | 30 |
+| 5 | **defenestrate** to throw someone **out of a window** | label | orbs | cream, peach | crowd | a3 | wave | Lexend | ruler | c3 | slow | push | 37 |
+| 6 | **apricity** the warmth of **the sun in winter** | question | orbs | dusk, sky | cramped | a1 | flip | Andika | font | c4 | medium | drift | 28 |
+| 7 | **susurrus** a soft **whispering sound** | label | ribbons | cream, rose | cramped | a4 | wave | OpenDyslexic | ruler | c4 | medium | still | 31 |
+| 8 | **halcyon** calm, happy **and peaceful** | label | dust | dusk, periwinkle | cramped | a4 | flip | Lexend | ruler | c3 | slow | drift | 38 |
+| 9 | **ineffable** too great **for words** | label | ribbons | cream, periwinkle | glare | a1 | morph | Atkinson Hyperlegible | bionic | c4 | fast | still | 25 |
+| 10 | **overmorrow** the day **after tomorrow** | label | dust | cream, peach | cramped | a4 | wave | Andika | tint | c2 | medium | push | 30 |
+| 11 | **tsundoku** buying books and **letting them pile up** | question | dust | cream, mint | glare | a3 | scatter | Comic Neue | all | c2 | fast | push | 31 |
+| 12 | **komorebi** sunlight through **the leaves of trees** | question | orbs | ink, mint | faint | a1 | morph | Lexend | tint | c4 | fast | still | 26 |
+| 13 | **saudade** a deep longing for **something absent** | question | dust | cream, mint | crowd | a3 | flip | Andika | bionic | c4 | slow | push | 38 |
+| 14 | **hygge** cosy and **content together** | label | orbs | navy, sky | swim | a1 | scatter | Atkinson Hyperlegible | tint | c3 | slow | drift | 38 |
+| 15 | **sonorous** deep, full **and rich in sound** | label | dust | dusk, mint | cramped | a2 | sweep | Atkinson Hyperlegible | bionic | c1 | medium | drift | 31 |
+| 16 | **lethologica** when you cannot **find the word** | label | dust | dusk, sky | faint | a3 | scatter | OpenDyslexic | font | c1 | medium | drift | 28 |
+| 17 | **quixotic** noble, hopeful **and wildly unrealistic** | label | letters | ink, butter | crowd | a2 | flip | Atkinson Hyperlegible | ruler | c2 | fast | drift | 25 |
+| 18 | **sesquipedalian** a lover of **very long words** | question | ribbons | dusk, rose | glare | a4 | sweep | OpenDyslexic | all | c4 | slow | still | 46 |
+| 19 | **eloquent** speaking **clearly and well** | question | orbs | navy, apricot | swim | a4 | sweep | Andika | tint | c3 | medium | push | 31 |
+| 20 | **luminous** full of **light** | question | ribbons | dusk, apricot | faint | a4 | flip | Readex Pro | font | c1 | slow | still | 34 |
 
 ## Where words come from (21-40)
 
@@ -153,26 +153,26 @@ The type follows the idea. Every other setting is dealt out evenly and shuffled,
 
 The paragraph each video teaches, which is also the text that turns hard to read and is then restyled.
 
-1. **petrichor** Petrichor was coined in 1964 by two Australian scientists. It joins the Greek words for stone and for the fluid said to run in the veins of the gods.
-2. **serendipity** Horace Walpole made the word up in 1754. He took it from a fairy tale, The Three Princes of Serendip, whose heroes kept finding things they were not looking for.
-3. **mellifluous** From the Latin mel, honey, and fluere, to flow. Use it for a voice or a tune so smooth and sweet that it seems to pour.
-4. **ephemeral** From the Greek ephemeros, lasting a day. In English it was first used for fevers, and for insects that live for a single day, like the mayfly.
-5. **defenestrate** From the Latin fenestra, window. The word is tied to Prague, where officials were thrown from a castle window in 1618, helping to start the Thirty Years War.
-6. **apricity** A rare word recorded in a dictionary of 1623 and hardly used since. It is waiting for the next cold bright day when you turn your face to the sun.
-7. **susurrus** From the Latin for a murmur or a whisper. Say it slowly and it does what it means: wind in dry leaves, or a quiet tide on sand.
-8. **halcyon** The halcyon was a bird of Greek myth, said to nest on the sea and calm the waves. Halcyon days are a peaceful time you look back on fondly.
-9. **ineffable** From the Latin for unutterable. It is the word for a feeling or a sight so big that language runs out, which makes it a word about the limits of words.
-10. **overmorrow** English once had a single word for this, and German still does. Overmorrow fell out of use centuries ago, but nothing stops you bringing it back.
-11. **tsundoku** A Japanese word that blends tsunde oku, to pile things up for later, with doku, reading. Most readers have a small tower of tsundoku somewhere.
-12. **komorebi** A Japanese word with no single match in English. It is built from the words for tree, for leaking through and for sun.
-13. **saudade** A Portuguese word for missing a person, a place or a time, mixed with the warmth of having known it. It is often called impossible to translate.
-14. **hygge** A Danish and Norwegian word for the feeling of a warm room, good company and nothing to rush for. English borrowed it in the 2010s.
-15. **sonorous** From the Latin sonor, sound. A church bell is sonorous. So is a cello, and so is the voice of someone reading aloud well.
-16. **lethologica** The name for that moment when a word is on the tip of your tongue. It comes from the Greek lethe, forgetfulness, and logos, word.
-17. **quixotic** From Don Quixote, the hero of the 1605 novel by Cervantes, who rode out to fight windmills that he believed were giants.
-18. **sesquipedalian** From a Latin joke by the poet Horace about words a foot and a half long. It is a long word for long words, so it describes itself.
-19. **eloquent** From the Latin loqui, to speak. Being eloquent is not about long words. It is about saying a thing so it lands with the person listening.
-20. **luminous** From the Latin lumen, light. Paint can be luminous, and so can a watch dial, a jellyfish or a face with good news.
+1. **petrichor** The pleasant, earthy scent that rises when rain lands on ground that has been dry for a while. Plant oils and soil bacteria make it, and falling raindrops lift it into the air.
+2. **serendipity** Finding something good that you were not looking for. It is more than luck: it takes the wit to notice the lucky thing and see its worth. Penicillin was found this way.
+3. **mellifluous** Describes a sound that is sweet, smooth and pleasant to hear, flowing without a rough edge. It is used mostly for voices, music and speech, and often as praise for a singer.
+4. **ephemeral** Lasting for a very short time, and often more precious because of it. A mayfly, a rainbow, cherry blossom and a message that vanishes after reading are all ephemeral. The opposite is permanent.
+5. **defenestrate** To throw someone or something out of a window. It is mostly said with a wink now, and also means removing someone from power suddenly, as when a party defenestrates its leader.
+6. **apricity** The warmth of the sun on a cold winter day, felt on your skin while the air around you stays sharp. It names a small pleasure, which is why people who learn it keep it.
+7. **susurrus** A soft, continuous whispering, murmuring or rustling sound. Think of wind moving through dry leaves, a quiet tide on sand, or low voices in the next room. The word itself sounds like what it describes.
+8. **halcyon** Calm, happy and untroubled, always said of a time in the past. Halcyon days are a golden stretch you remember fondly, such as a long childhood summer, often with a sense that it cannot return.
+9. **ineffable** Too great, too intense or too sacred to be put into words. People reach for it when describing awe, grief, love or beauty, at the exact moment when ordinary language stops being enough.
+10. **overmorrow** The day after tomorrow, in one word. If today is Monday, overmorrow is Wednesday. It is old and rare now, but it does a job that modern English needs four words for.
+11. **tsundoku** The habit of buying books and letting them pile up unread. It is Japanese, and it carries no shame: the pile is a promise to your future self, not a failure of your present one.
+12. **komorebi** Sunlight filtering through the leaves of trees, and the shifting pattern of light and shadow it makes on the ground. It is a Japanese word for a sight English needs a whole sentence to describe.
+13. **saudade** A deep, bittersweet longing for someone or something that is gone and may never come back. It is sadness and gratitude at once: missing a person, a place or a time because it mattered.
+14. **hygge** A feeling of cosy contentment and ease, usually shared. Candles, warm socks, a slow meal with friends and no reason to hurry all count. It is Danish, and it is said roughly as hoo-gah.
+15. **sonorous** Having a deep, full and resonant sound that seems to fill the space around it. A church bell, a cello and a rich speaking voice are sonorous. It can also describe grand, impressive language.
+16. **lethologica** The temporary inability to remember a word that you know perfectly well. You can often recall its first letter, its length or its rhythm, but the word itself stays on the tip of your tongue.
+17. **quixotic** Pursuing lofty, romantic ideals with no regard for how practical they are. A quixotic plan is noble and doomed at once. It can be an insult or a compliment, depending on who is speaking.
+18. **sesquipedalian** Describes a very long word, or a person who is fond of using them. It often carries a gentle tease, aimed at writing that picks the grand word where a plain one would do.
+19. **eloquent** Able to express ideas clearly, fluently and persuasively. It is less about long words than about the right ones. A look, a silence or a gesture can be eloquent too, when it says enough.
+20. **luminous** Giving off light, or seeming to glow from within. A watch dial and a jellyfish are luminous. So is clear, radiant writing, a painting full of light, or a face lit up by good news.
 21. **muscle** The Romans thought a flexing muscle looked like a small mouse moving under the skin. The Latin word musculus means exactly that.
 22. **disaster** From the Italian disastro: dis, bad, and astro, star. People once blamed calamities on the unlucky position of a planet or a star.
 23. **goodbye** Over the 1500s the phrase was squeezed into godbwye. The first part then shifted to good, copying good day and good night.

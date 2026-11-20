@@ -5,7 +5,8 @@
  *   h  headline, shown large in the accent colour
  *   s  connecting words, shown small in white
  *   e  landing words, shown large in the accent colour (optional)
- *   b  the short lesson. This paragraph is the one that turns hard to read and is then restyled.
+ *   b  the short lesson. For words this is a full definition (meaning, feel, how it is used), not the word's history.
+ *       This paragraph is the one that turns hard to read and is then restyled.
  *   k  kicker override (optional)
  *   m  motif: a background made for this idea, used in place of the dealt one (optional)
  *   v  quotes only: true once someone has checked the wording against the primary text
@@ -15,26 +16,26 @@
  */
 export const IDEAS = [
   // ---- words (1-20)
-  { t: 'word', m: 'rain', h: 'petrichor', s: 'the smell of', e: 'rain on dry earth', b: 'Petrichor was coined in 1964 by two Australian scientists. It joins the Greek words for stone and for the fluid said to run in the veins of the gods.' },
-  { t: 'word', h: 'serendipity', s: 'a happy', e: 'accident', b: 'Horace Walpole made the word up in 1754. He took it from a fairy tale, The Three Princes of Serendip, whose heroes kept finding things they were not looking for.' },
-  { t: 'word', h: 'mellifluous', s: 'a sound that', e: 'flows like honey', b: 'From the Latin mel, honey, and fluere, to flow. Use it for a voice or a tune so smooth and sweet that it seems to pour.' },
-  { t: 'word', h: 'ephemeral', s: 'lasting only', e: 'a very short time', b: 'From the Greek ephemeros, lasting a day. In English it was first used for fevers, and for insects that live for a single day, like the mayfly.' },
-  { t: 'word', h: 'defenestrate', s: 'to throw someone', e: 'out of a window', b: 'From the Latin fenestra, window. The word is tied to Prague, where officials were thrown from a castle window in 1618, helping to start the Thirty Years War.' },
-  { t: 'word', h: 'apricity', s: 'the warmth of', e: 'the sun in winter', b: 'A rare word recorded in a dictionary of 1623 and hardly used since. It is waiting for the next cold bright day when you turn your face to the sun.' },
-  { t: 'word', h: 'susurrus', s: 'a soft', e: 'whispering sound', b: 'From the Latin for a murmur or a whisper. Say it slowly and it does what it means: wind in dry leaves, or a quiet tide on sand.' },
-  { t: 'word', h: 'halcyon', s: 'calm, happy', e: 'and peaceful', b: 'The halcyon was a bird of Greek myth, said to nest on the sea and calm the waves. Halcyon days are a peaceful time you look back on fondly.' },
-  { t: 'word', h: 'ineffable', s: 'too great', e: 'for words', b: 'From the Latin for unutterable. It is the word for a feeling or a sight so big that language runs out, which makes it a word about the limits of words.' },
-  { t: 'word', h: 'overmorrow', s: 'the day', e: 'after tomorrow', b: 'English once had a single word for this, and German still does. Overmorrow fell out of use centuries ago, but nothing stops you bringing it back.' },
-  { t: 'word', h: 'tsundoku', s: 'buying books and', e: 'letting them pile up', b: 'A Japanese word that blends tsunde oku, to pile things up for later, with doku, reading. Most readers have a small tower of tsundoku somewhere.' },
-  { t: 'word', h: 'komorebi', s: 'sunlight through', e: 'the leaves of trees', b: 'A Japanese word with no single match in English. It is built from the words for tree, for leaking through and for sun.' },
-  { t: 'word', h: 'saudade', s: 'a deep longing for', e: 'something absent', b: 'A Portuguese word for missing a person, a place or a time, mixed with the warmth of having known it. It is often called impossible to translate.' },
-  { t: 'word', h: 'hygge', s: 'cosy and', e: 'content together', b: 'A Danish and Norwegian word for the feeling of a warm room, good company and nothing to rush for. English borrowed it in the 2010s.' },
-  { t: 'word', h: 'sonorous', s: 'deep, full', e: 'and rich in sound', b: 'From the Latin sonor, sound. A church bell is sonorous. So is a cello, and so is the voice of someone reading aloud well.' },
-  { t: 'word', h: 'lethologica', s: 'when you cannot', e: 'find the word', b: 'The name for that moment when a word is on the tip of your tongue. It comes from the Greek lethe, forgetfulness, and logos, word.' },
-  { t: 'word', h: 'quixotic', s: 'noble, hopeful', e: 'and wildly unrealistic', b: 'From Don Quixote, the hero of the 1605 novel by Cervantes, who rode out to fight windmills that he believed were giants.' },
-  { t: 'word', h: 'sesquipedalian', s: 'a lover of', e: 'very long words', b: 'From a Latin joke by the poet Horace about words a foot and a half long. It is a long word for long words, so it describes itself.' },
-  { t: 'word', h: 'eloquent', s: 'speaking', e: 'clearly and well', b: 'From the Latin loqui, to speak. Being eloquent is not about long words. It is about saying a thing so it lands with the person listening.' },
-  { t: 'word', h: 'luminous', s: 'full of', e: 'light', b: 'From the Latin lumen, light. Paint can be luminous, and so can a watch dial, a jellyfish or a face with good news.' },
+  { t: 'word', m: 'rain', h: 'petrichor', s: 'the smell of', e: 'rain on dry earth', b: 'The pleasant, earthy scent that rises when rain lands on ground that has been dry for a while. Plant oils and soil bacteria make it, and falling raindrops lift it into the air.' },
+  { t: 'word', h: 'serendipity', s: 'a happy', e: 'accident', b: 'Finding something good that you were not looking for. It is more than luck: it takes the wit to notice the lucky thing and see its worth. Penicillin was found this way.' },
+  { t: 'word', h: 'mellifluous', s: 'a sound that', e: 'flows like honey', b: 'Describes a sound that is sweet, smooth and pleasant to hear, flowing without a rough edge. It is used mostly for voices, music and speech, and often as praise for a singer.' },
+  { t: 'word', h: 'ephemeral', s: 'lasting only', e: 'a very short time', b: 'Lasting for a very short time, and often more precious because of it. A mayfly, a rainbow, cherry blossom and a message that vanishes after reading are all ephemeral. The opposite is permanent.' },
+  { t: 'word', h: 'defenestrate', s: 'to throw someone', e: 'out of a window', b: 'To throw someone or something out of a window. It is mostly said with a wink now, and also means removing someone from power suddenly, as when a party defenestrates its leader.' },
+  { t: 'word', h: 'apricity', s: 'the warmth of', e: 'the sun in winter', b: 'The warmth of the sun on a cold winter day, felt on your skin while the air around you stays sharp. It names a small pleasure, which is why people who learn it keep it.' },
+  { t: 'word', h: 'susurrus', s: 'a soft', e: 'whispering sound', b: 'A soft, continuous whispering, murmuring or rustling sound. Think of wind moving through dry leaves, a quiet tide on sand, or low voices in the next room. The word itself sounds like what it describes.' },
+  { t: 'word', h: 'halcyon', s: 'calm, happy', e: 'and peaceful', b: 'Calm, happy and untroubled, always said of a time in the past. Halcyon days are a golden stretch you remember fondly, such as a long childhood summer, often with a sense that it cannot return.' },
+  { t: 'word', h: 'ineffable', s: 'too great', e: 'for words', b: 'Too great, too intense or too sacred to be put into words. People reach for it when describing awe, grief, love or beauty, at the exact moment when ordinary language stops being enough.' },
+  { t: 'word', h: 'overmorrow', s: 'the day', e: 'after tomorrow', b: 'The day after tomorrow, in one word. If today is Monday, overmorrow is Wednesday. It is old and rare now, but it does a job that modern English needs four words for.' },
+  { t: 'word', h: 'tsundoku', s: 'buying books and', e: 'letting them pile up', b: 'The habit of buying books and letting them pile up unread. It is Japanese, and it carries no shame: the pile is a promise to your future self, not a failure of your present one.' },
+  { t: 'word', h: 'komorebi', s: 'sunlight through', e: 'the leaves of trees', b: 'Sunlight filtering through the leaves of trees, and the shifting pattern of light and shadow it makes on the ground. It is a Japanese word for a sight English needs a whole sentence to describe.' },
+  { t: 'word', h: 'saudade', s: 'a deep longing for', e: 'something absent', b: 'A deep, bittersweet longing for someone or something that is gone and may never come back. It is sadness and gratitude at once: missing a person, a place or a time because it mattered.' },
+  { t: 'word', h: 'hygge', s: 'cosy and', e: 'content together', b: 'A feeling of cosy contentment and ease, usually shared. Candles, warm socks, a slow meal with friends and no reason to hurry all count. It is Danish, and it is said roughly as hoo-gah.' },
+  { t: 'word', h: 'sonorous', s: 'deep, full', e: 'and rich in sound', b: 'Having a deep, full and resonant sound that seems to fill the space around it. A church bell, a cello and a rich speaking voice are sonorous. It can also describe grand, impressive language.' },
+  { t: 'word', h: 'lethologica', s: 'when you cannot', e: 'find the word', b: 'The temporary inability to remember a word that you know perfectly well. You can often recall its first letter, its length or its rhythm, but the word itself stays on the tip of your tongue.' },
+  { t: 'word', h: 'quixotic', s: 'noble, hopeful', e: 'and wildly unrealistic', b: 'Pursuing lofty, romantic ideals with no regard for how practical they are. A quixotic plan is noble and doomed at once. It can be an insult or a compliment, depending on who is speaking.' },
+  { t: 'word', h: 'sesquipedalian', s: 'a lover of', e: 'very long words', b: 'Describes a very long word, or a person who is fond of using them. It often carries a gentle tease, aimed at writing that picks the grand word where a plain one would do.' },
+  { t: 'word', h: 'eloquent', s: 'speaking', e: 'clearly and well', b: 'Able to express ideas clearly, fluently and persuasively. It is less about long words than about the right ones. A look, a silence or a gesture can be eloquent too, when it says enough.' },
+  { t: 'word', h: 'luminous', s: 'full of', e: 'light', b: 'Giving off light, or seeming to glow from within. A watch dial and a jellyfish are luminous. So is clear, radiant writing, a painting full of light, or a face lit up by good news.' },
 
   // ---- where words come from (21-40)
   { t: 'origin', h: 'muscle', s: 'comes from the Latin for', e: 'little mouse', b: 'The Romans thought a flexing muscle looked like a small mouse moving under the skin. The Latin word musculus means exactly that.' },

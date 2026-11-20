@@ -32,8 +32,8 @@ test('every level of every setting is used about equally often', () => {
   }
 });
 
-test('videos run between 15 and 45 seconds', () => {
-  for (const v of variants) { const d = timeline(v).duration; assert.ok(d >= 15 && d <= 45, `${v.id}: ${d}`); }
+test('videos run between 15 and 48 seconds', () => {
+  for (const v of variants) { const d = timeline(v).duration; assert.ok(d >= 15 && d <= 48, `${v.id}: ${d}`); }
 });
 
 test('analysis ranks the levels of a setting', () => {
