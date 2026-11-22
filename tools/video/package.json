@@ -1,0 +1,24 @@
+{
+  "name": "@dr/video",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Three.js video experiments for Easy Reader: 100 tagged variants from one script.",
+  "scripts": {
+    "build": "node build.mjs",
+    "list": "node render.mjs list",
+    "render": "node render.mjs render",
+    "stills": "node render.mjs stills",
+    "manifest": "node render.mjs manifest",
+    "analyse": "node analyse.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/source-serif-4": "^5.2.9",
+    "esbuild": "^0.28.2"
+  }
+}
