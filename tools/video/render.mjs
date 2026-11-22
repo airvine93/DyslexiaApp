@@ -5,6 +5,7 @@
  *   node render.mjs list                      every variant and its settings
  *   node render.mjs manifest                  write manifest.csv, results-template.csv and IDEAS.md
  *   node render.mjs render ER-001 ER-042      render some (or: render all, render 1-10, render type=quote font=opendyslexic)
+ *   node render.mjs render varieties --word 12   one idea in each of the five prompt varieties (see PROMPTS.md)
  *   node render.mjs stills ER-001             five PNGs per variant, for a quick look
  *
  * Options: --out <dir> (default out/)  --size 1080x1920  --fps 30  --link <url>  --jobs 2
@@ -20,7 +21,7 @@ import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { buildAll } from './build.mjs';
-import { DIMENSIONS, DIMENSION_NOTES, FONTS, buildVariants, timeline } from './src/design.js';
+import { DIMENSIONS, DIMENSION_NOTES, FONTS, VARIETIES, buildVariants, buildVarieties, timeline } from './src/design.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
@@ -31,10 +32,12 @@ const [width, height] = opt('size', '1080x1920').split('x').map(Number);
 const fps = Number(opt('fps', 30));
 const link = opt('link', '');
 const jobs = Number(opt('jobs', 2));
+const word = Number(opt('word', 12));
 const variants = buildVariants();
 
 /** Which variants the remaining arguments name: ids, numbers, ranges, "all", or dimension=level filters. */
 function pick(words) {
+  if (words[0] === 'varieties') return buildVarieties(word);
   if (!words.length || words.includes('all')) return variants;
   const chosen = new Set();
   const filters = words.filter((w) => w.includes('='));
@@ -94,6 +97,9 @@ function writeManifest() {
   for (const v of variants) md.push(`${v.n}. **${v.content.head}** ${v.content.body}`);
   md.push('');
   writeFileSync(join(here, 'IDEAS.md'), md.join('\n'));
+  const pm = ['# Five prompt varieties', '', 'Five written prompts for the look of a video. Each is also built into the script, so `node render.mjs render varieties --word 12` renders idea 12 in all five.', 'Made by `node render.mjs manifest` from `VARIETIES` in `src/design.js`. `{word}`, `{meaning}` and `{lesson}` stand for the idea\'s own text.', ''];
+  for (const v of VARIETIES) pm.push(`## ${v.key}. ${v.name}`, '', `Background: \`${v.motif}\`. Settings: ${Object.entries(v.params).map(([k, x]) => `${k} ${x}`).join(', ')}.`, '', `> ${v.prompt}`, '');
+  writeFileSync(join(here, 'PROMPTS.md'), pm.join('\n'));
   console.log('wrote manifest.csv, results-template.csv and IDEAS.md');
 }
 

@@ -4,10 +4,10 @@
  *  - for people: a browser of all 100 variants with play, scrub and each variant's settings
  */
 import { createPlayer } from './scene.js';
-import { DIMENSIONS, DIMENSION_NOTES, FONTS, buildVariants } from './design.js';
+import { DIMENSIONS, DIMENSION_NOTES, FONTS, buildVariants, buildVarieties } from './design.js';
 
 export async function boot(THREE) {
-  const variants = buildVariants();
+  const variants = [...buildVarieties(), ...buildVariants()]; // the five varieties of one word first, then the 100
   const byId = new Map(variants.map((v) => [v.id, v]));
   // every face must be loaded before any text is measured
   const faces = [['Inter ER', 400], ['Inter ER', 600], ['Inter ER', 800], ['Serif ER', 400], ['Serif ER', 400, 'italic'],
@@ -52,16 +52,17 @@ export async function boot(THREE) {
     t = 0; playing = autoplay; last = 0;
     playBtn.textContent = playing ? 'Pause' : 'Play';
     for (const el of list.children) el.setAttribute('aria-current', el.dataset.id === id ? 'true' : 'false');
-    $('title').textContent = `${current.id} · ${current.content.head}`;
+    $('title').textContent = `${current.id} · ${current.content.head}${current.variety ? ` · ${current.variety}` : ''}`;
+    $('prompt').hidden = !current.variety; $('prompt').textContent = current.prompt ?? '';
     $('tag').textContent = current.tag;
     recipe.innerHTML = Object.keys(DIMENSIONS).map((d) => `<div><dt>${DIMENSION_NOTES[d]}</dt><dd>${current.params[d]}</dd></div>`).join('');
     show();
   }
   function fill() {
     const q = query.trim().toLowerCase();
-    const rows = variants.filter((v) => (type === 'all' || v.params.type === type) && (!q || `${v.id} ${v.content.head} ${v.content.body} ${Object.values(v.params).join(' ')}`.toLowerCase().includes(q)));
+    const rows = variants.filter((v) => (type === 'all' || (type === 'variety' ? !!v.variety : v.params.type === type && !v.variety)) && (!q || `${v.id} ${v.content.head} ${v.content.body} ${Object.values(v.params).join(' ')}`.toLowerCase().includes(q)));
     count.textContent = `${rows.length} of ${variants.length}`;
-    list.innerHTML = rows.map((v) => `<li data-id="${v.id}" aria-current="${v.id === current.id}"><button type="button"><span class="num">${v.id.slice(3)}</span><span class="what"><b></b><i>${v.params.type} · ${FONTS[v.params.font].name} · ${v.params.hard} · ${v.params.reveal}</i></span></button></li>`).join('');
+    list.innerHTML = rows.map((v) => `<li data-id="${v.id}" aria-current="${v.id === current.id}"><button type="button"><span class="num">${v.variety ? v.id.slice(7) : v.id.slice(3)}</span><span class="what"><b></b><i>${v.variety ? `${v.variety} · ` : ''}${v.params.type} · ${FONTS[v.params.font].name} · ${v.params.hard} · ${v.params.reveal}</i></span></button></li>`).join('');
     [...list.children].forEach((el, i) => { el.querySelector('b').textContent = rows[i].content.head; });
   }
   list.addEventListener('click', (e) => { const li = e.target.closest('li'); if (li) select(li.dataset.id); });

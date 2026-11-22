@@ -35,6 +35,7 @@ header p { margin: 4px 0 0; color: var(--muted); max-width: 60ch; }
 .now h2 { font: 600 17px/1.3 var(--display); margin: 0 0 8px; }
 .tagrow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 #tag { font: 12px/1.4 var(--mono); color: var(--butter); overflow-wrap: anywhere; min-width: 0; }
+#prompt { margin: 12px 0 0; padding: 10px 12px; background: var(--panel); border-radius: 8px; color: var(--muted); font-size: 13px; max-height: 9.5em; overflow-y: auto; }
 #recipe { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 16px; margin: 12px 0 0; }
 #recipe div { min-width: 0; border-top: 1px solid var(--line); padding-top: 6px; }
 #recipe dt { font-size: 11px; color: var(--muted); letter-spacing: 0.02em; }
@@ -79,11 +80,13 @@ header p { margin: 4px 0 0; color: var(--muted); max-width: 60ch; }
     <div class="now">
       <h2 id="title"></h2>
       <div class="tagrow"><code id="tag"></code><button type="button" id="copy">Copy tag</button></div>
+      <p id="prompt" hidden></p>
       <dl id="recipe"></dl>
     </div>
     <div class="filters">
       <div id="types" role="group" aria-label="Filter by what is taught">
         <button type="button" data-type="all" aria-pressed="true">All</button>
+        <button type="button" data-type="variety" aria-pressed="false">5 varieties</button>
         <button type="button" data-type="word" aria-pressed="false">Words</button>
         <button type="button" data-type="origin" aria-pressed="false">Origins</button>
         <button type="button" data-type="quote" aria-pressed="false">Quotes</button>

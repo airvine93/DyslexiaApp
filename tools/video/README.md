@@ -32,6 +32,16 @@ Rendering needs `ffmpeg` and Playwright's Chromium. A 20 second video takes abou
 Videos are 1080x1920 at 30 frames a second with a silent audio track, so music or a voice can be added in an editor.
 `--size 1080x1350` and other sizes scale the text layer to fit and fill the rest with the background.
 
+## Prompt varieties
+
+`PROMPTS.md` holds five written prompts for the look of a video (Canopy light, Falling leaves, Sun shafts, Page in the shade, Soft focus). Each one is also built into the script as a variety: a background made for it plus the settings that give it its character.
+
+```sh
+node render.mjs render varieties --word 12   # idea 12 (komorebi) in all five
+```
+
+An idea can also name its own background with `m` in `src/ideas.js` (petrichor uses `rain`). That background replaces the one dealt by the experiment.
+
 ## Where the style comes from
 
 Neither the DaVinci folder nor the Emotion Shaper repository had a Three.js script, so this one borrows the two video styles that were there:

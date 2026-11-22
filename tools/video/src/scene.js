@@ -396,6 +396,71 @@ export function createPlayer(THREE, canvas, variant, opts = {}) {
         glows[0].m.material.uniforms.a.value = glows[0].a * fade * (0.9 + 0.1 * Math.sin(t * 0.5)); glows[1].m.material.uniforms.a.value = glows[1].a * fade;
       };
     },
+    /** Dappled light: soft patches of sun that slide and breathe, as under a canopy. On a light page the same shapes fall as shade. */
+    dapple(shade = false) {
+      const NOISE = 'float hsh(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }' +
+        ' float vn(vec2 p){ vec2 i = floor(p); vec2 f = fract(p); f = f * f * (3.0 - 2.0 * f); return mix(mix(hsh(i), hsh(i + vec2(1.0, 0.0)), f.x), mix(hsh(i + vec2(0.0, 1.0)), hsh(i + vec2(1.0, 1.0)), f.x), f.y); }' +
+        ' float fbm(vec2 p){ return 0.55 * vn(p) + 0.3 * vn(p * 2.03 + 7.1) + 0.15 * vn(p * 4.01 + 3.7); }';
+      const tone = shade ? mix3(col.deep, [0.2, 0.32, 0.22], 0.55) : mix3(pastel, [1, 0.82, 0.42], 0.5);
+      const m = new THREE.ShaderMaterial({ transparent: true, depthTest: false, depthWrite: false, blending: shade ? THREE.NormalBlending : THREE.AdditiveBlending,
+        uniforms: { t: { value: 0 }, a: { value: 0 }, c: { value: v3(tone) }, asp: { value: W / H }, sd: { value: seed % 97 } }, vertexShader: VS,
+        fragmentShader: 'uniform vec3 c; uniform float a; uniform float t; uniform float asp; uniform float sd; varying vec2 vUv; ' + NOISE +
+          ' void main(){ vec2 p = vUv * vec2(asp, 1.0) * 4.6 + sd; p += vec2(sin(t * 0.11) * 0.5, t * 0.035);' +
+          ' vec2 w = 0.42 * vec2(sin(t * 0.37 + p.y * 1.3), cos(t * 0.31 + p.x * 1.1)); float n = fbm(p + w); float leaf = fbm(p * 2.6 - w * 1.4 + 11.0);' +
+          ' float lit = smoothstep(0.5, 0.66, n) * (0.55 + 0.45 * smoothstep(0.35, 0.6, leaf));' +
+          ' float v = smoothstep(1.25, 0.2, length((vUv - vec2(0.62, 0.72)) * vec2(1.0, 1.1))); gl_FragColor = vec4(c, a * lit * (0.45 + 0.55 * v)); }' });
+      disposables.push(m);
+      const plane = new THREE.Mesh(quad, m); plane.renderOrder = 1; plane.position.z = -260; plane.scale.set(W * 1.5, H * 1.5, 1); scene.add(plane);
+      return (t, fade) => { m.uniforms.t.value = t; m.uniforms.a.value = (shade ? 0.2 : 0.3) * fade; };
+    },
+    shade() { return backgrounds.dapple(true); },
+    /** Leaves letting go one at a time and turning as they fall through the depth of the frame. */
+    leaves() {
+      const LEAF = 'uniform vec3 c; uniform float a; varying vec2 vUv; void main(){ vec2 p = (vUv - 0.5) * 2.0; float w = (1.0 - p.y * p.y) * 0.46 * (1.0 - 0.25 * p.y);' +
+        ' float body = smoothstep(0.06, -0.06, abs(p.x) - w); float rib = 1.0 - 0.45 * smoothstep(0.035, 0.0, abs(p.x)); gl_FragColor = vec4(c, a * body * rib); }';
+      const span = H * 2.6;
+      const ls = Array.from({ length: 30 }, (_, i) => {
+        const tone = mix3(i % 3 ? pastel : mix3(pastel, [0.95, 0.8, 0.45], 0.6), dark ? col.bg : [1, 1, 1], 0.12 + R() * 0.2);
+        const m = new THREE.Mesh(quad, material(LEAF, { c: { value: v3(tone) }, a: { value: 0 } }));
+        m.renderOrder = 1; scene.add(m);
+        return { m, x: (R() - 0.5) * W * 2.8, y: R() * span, z: -150 - R() * 1900, s: 70 + R() * 110, sp: 34 + R() * 46, ph: R() * 6.28, sw: 60 + R() * 150, a: 0.16 + R() * 0.2 };
+      });
+      return (t, fade) => { for (const l of ls) {
+        const y = span / 2 - ((l.y + t * l.sp) % span);
+        l.m.position.set(l.x + Math.sin(t * 0.5 + l.ph) * l.sw, y + Math.cos(t * 1.0 + l.ph) * 14, l.z);
+        l.m.rotation.set(Math.sin(t * 0.7 + l.ph) * 1.1, t * 0.35 + l.ph, Math.sin(t * 0.5 + l.ph) * 0.9 + l.ph);
+        l.m.scale.set(l.s, l.s * 1.7, 1); l.m.material.uniforms.a.value = l.a * fade * (dark ? 1 : 1.5);
+      } };
+    },
+    /** Slanting shafts of sun with dust turning in them. */
+    shafts() {
+      const m = new THREE.ShaderMaterial({ transparent: true, depthTest: false, depthWrite: false, blending: glowBlend,
+        uniforms: { t: { value: 0 }, a: { value: 0 }, c: { value: v3(mix3(pastel, [1, 0.9, 0.66], 0.5)) }, asp: { value: W / H } }, vertexShader: VS,
+        fragmentShader: 'uniform vec3 c; uniform float a; uniform float t; uniform float asp; varying vec2 vUv; float h1(float x){ return fract(sin(x * 127.1) * 43758.5453); }' +
+          ' float n1(float x){ float i = floor(x); float f = fract(x); f = f * f * (3.0 - 2.0 * f); return mix(h1(i), h1(i + 1.0), f); }' +
+          ' void main(){ vec2 p = (vUv - vec2(0.5, 1.0)) * vec2(asp, 1.0); float q = p.x * 0.82 - p.y * 0.52;' +
+          ' float rays = n1(q * 5.0 + t * 0.05) * 0.6 + n1(q * 13.0 - t * 0.08 + 4.0) * 0.4; rays = smoothstep(0.3, 0.68, rays);' +
+          ' float fall = smoothstep(-1.15, -0.05, p.y) * smoothstep(0.75, 0.2, abs(p.x + 0.12)); gl_FragColor = vec4(c, a * rays * fall * (0.85 + 0.15 * sin(t * 0.6 + q * 9.0))); }' });
+      disposables.push(m);
+      const plane = new THREE.Mesh(quad, m); plane.renderOrder = 1; plane.position.z = -420; plane.scale.set(W * 1.7, H * 1.7, 1); scene.add(plane);
+      const dust = backgrounds.dust();
+      return (t, fade) => { m.uniforms.t.value = t; m.uniforms.a.value = (dark ? 0.5 : 0.5) * fade; dust(t * 0.45, fade * 0.8); };
+    },
+    /** Soft-focus discs of light, the way bright leaves look when the eye rests on something nearer. */
+    bokeh() {
+      const n = 64, pos = new Float32Array(n * 3), prm = new Float32Array(n * 3);
+      for (let i = 0; i < n; i++) { pos.set([(R() - 0.5) * W * 2.6, R() * 4200, -300 - R() * 1500], i * 3); prm.set([70 + R() * 150, 8 + R() * 26, R()], i * 3); }
+      const g = new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('prm', new THREE.BufferAttribute(prm, 3));
+      const m = new THREE.ShaderMaterial({ transparent: true, depthTest: false, depthWrite: false, blending: glowBlend,
+        uniforms: { t: { value: 0 }, a: { value: 1 }, c: { value: v3(pastel) }, c2: { value: v3(mix3(pastel, [1, 0.88, 0.55], 0.65)) }, k: { value: H } },
+        vertexShader: 'attribute vec3 prm; uniform float t; uniform float k; varying float tw; varying float mixv; void main(){ vec3 p = position; p.y = mod(p.y + t * prm.y, 4200.0) - 2100.0; p.x += sin(t * 0.22 + prm.z * 40.0) * 70.0;' +
+          ' vec4 mv = modelViewMatrix * vec4(p, 1.0); gl_Position = projectionMatrix * mv; gl_PointSize = prm.x * k * 1.9 / -mv.z; tw = 0.5 + 0.5 * sin(t * 0.55 + prm.z * 30.0); mixv = prm.z; }',
+        fragmentShader: 'uniform vec3 c; uniform vec3 c2; uniform float a; varying float tw; varying float mixv; void main(){ float d = length(gl_PointCoord - 0.5) * 2.0; float g = smoothstep(1.0, 0.86, d) * (0.6 + 0.4 * smoothstep(0.55, 0.95, d)); gl_FragColor = vec4(mix(c, c2, step(0.5, mixv)), g * a * (0.35 + 0.65 * tw)); }' });
+      disposables.push(m, g);
+      const pts = new THREE.Points(g, m); pts.frustumCulled = false; pts.renderOrder = 1; scene.add(pts);
+      return (t, fade) => { m.uniforms.t.value = t; m.uniforms.a.value = (dark ? 0.13 : 0.3) * fade; };
+    },
   };
   // a background made for this idea wins over the one dealt by the experiment
   const updateBackground = backgrounds[C.motif ?? P.scene]();
